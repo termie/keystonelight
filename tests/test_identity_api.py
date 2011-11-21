@@ -34,7 +34,7 @@ class IdentityApi(test.TestCase):
                     password='foo2',
                     tenants=[self.tenant_bar['id']]))
     self.extras_foobar = self.identity_backend.create_extras(
-        'foo', 'bar',
+        'user_tenant-%s-%s' % ('foo', 'bar'),
         {'extra': 'extra'})
 
   def _login(self):
@@ -154,26 +154,26 @@ class IdentityApi(test.TestCase):
     tenant_id = 'bar'
     c = client.TestClient(self.app, token=token_id)
     extras_ref = dict(baz='qaz')
-    resp = c.create_extras(user_id=user_id, tenant_id=tenant_id, **extras_ref)
+    resp = c.create_extras(extras_id='user_tenant-%s-%s' % (user_id, tenant_id), **extras_ref)
     data = json.loads(resp.body)
     self.assertEquals(data['baz'], 'qaz')
 
-    get_resp = c.get_extras(user_id=user_id, tenant_id=tenant_id)
+    get_resp = c.get_extras_by_user_tenant(user_id=user_id, tenant_id=tenant_id)
     get_data = json.loads(get_resp.body)
 
     self.assertDictEquals(data, get_data)
 
-    update_resp = c.update_extras(user_id=user_id,
-                                  tenant_id=tenant_id,
+    update_resp = c.update_extras(extras_id='user_tenant-%s-%s' % (user_id,
+                                                                   tenant_id),
                                   baz='WAZ')
     update_data = json.loads(update_resp.body)
 
     self.assertEquals('WAZ', update_data['baz'])
 
-    del_resp = c.delete_extras(user_id=user_id, tenant_id=tenant_id)
+    del_resp = c.delete_extras(extras_id='user_tenant-%s-%s' % (user_id, tenant_id))
     self.assertEquals(del_resp.body, '')
 
-    delget_resp = c.get_extras(user_id=user_id, tenant_id=tenant_id)
+    delget_resp = c.get_extras_by_user_tenant(user_id=user_id, tenant_id=tenant_id)
     self.assertEquals(delget_resp.body, '')
     # TODO(termie): we should probably return not founds instead of None
     #self.assertEquals(delget_resp.status, '404 Not Found')

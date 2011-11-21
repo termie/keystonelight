@@ -23,7 +23,7 @@ class KvsIdentity(test.TestCase):
                     password='foo2',
                     tenants=[self.tenant_bar['id']]))
     self.extras_foobar = self.identity_api.create_extras(
-        'foo', 'bar',
+        'user_tenant-%s-%s' % ('foo', 'bar'),
         {'extra': 'extra'})
 
   def test_authenticate_bad_user(self):
@@ -93,19 +93,19 @@ class KvsIdentity(test.TestCase):
     self.assertDictEquals(user_ref, self.user_foo)
 
   def test_get_extras_bad_user(self):
-    extras_ref = self.identity_api.get_extras(
+    extras_ref = self.identity_api.get_extras_by_user_tenant(
         user_id=self.user_foo['id'] + 'WRONG',
         tenant_id=self.tenant_bar['id'])
     self.assert_(extras_ref is None)
 
   def test_get_extras_bad_tenant(self):
-    extras_ref = self.identity_api.get_extras(
+    extras_ref = self.identity_api.get_extras_by_user_tenant(
         user_id=self.user_foo['id'],
         tenant_id=self.tenant_bar['id'] + 'WRONG')
     self.assert_(extras_ref is None)
 
   def test_get_extras(self):
-    extras_ref = self.identity_api.get_extras(
+    extras_ref = self.identity_api.get_extras_by_user_tenant(
         user_id=self.user_foo['id'],
         tenant_id=self.tenant_bar['id'])
     self.assertDictEquals(extras_ref, self.extras_foobar)

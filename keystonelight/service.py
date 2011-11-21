@@ -18,7 +18,9 @@ HIGH_LEVEL_CALLS = {
     'get_user': ('GET', '/user/%(user_id)s'),
     'get_tenant': ('GET', '/tenant/%(tenant_id)s'),
     'get_tenant_by_name': ('GET', '/tenant_name/%(tenant_name)s'),
-    'get_extras': ('GET', '/extras/%(tenant_id)s-%(user_id)s'),
+    'get_extras': ('GET', '/extras/%(extras_id)s'),
+    'get_extras_by_user_tenant': (
+        'GET', '/extras_user_tenant/%(user_id)s-%(tenant_id)s'),
     'get_token': ('GET', '/token/%(token_id)s'),
     }
 
@@ -38,8 +40,8 @@ LOW_LEVEL_CALLS = {
     # extras
     # NOTE(termie): these separators are probably going to bite us eventually
     'create_extras': ('POST', '/extras'),
-    'update_extras': ('PUT', '/extras/%(tenant_id)s-%(user_id)s'),
-    'delete_extras': ('DELETE', '/extras/%(tenant_id)s-%(user_id)s'),
+    'update_extras': ('PUT', '/extras/%(extras_id)s'),
+    'delete_extras': ('DELETE', '/extras/%(extras_id)s'),
     }
 
 
@@ -167,25 +169,27 @@ class IdentityController(BaseApplication):
   def delete_tenant(self, context, tenant_id):
     return self.identity_api.delete_tenant(context, tenant_id=tenant_id)
 
-  def get_extras(self, context, user_id, tenant_id):
+  def get_extras(self, context, extras_id):
     return self.identity_api.get_extras(
+        context, extras_id)
+
+  def get_extras_by_user_tenant(self, context, user_id, tenant_id):
+    return self.identity_api.get_extras_by_user_tenant(
         context, user_id=user_id, tenant_id=tenant_id)
 
   def create_extras(self, context, **kw):
-    user_id = kw.pop('user_id')
-    tenant_id = kw.pop('tenant_id')
+    extras_id = kw.pop('extras_id')
     return self.identity_api.create_extras(
-        context, user_id=user_id, tenant_id=tenant_id, data=kw)
+        context, extras_id=extras_id, data=kw)
 
-  def update_extras(self, context, user_id, tenant_id, **kw):
-    kw.pop('user_id', None)
-    kw.pop('tenant_id', None)
+  def update_extras(self, context, extras_id, **kw):
+    kw.pop('extras_id', None)
     return self.identity_api.update_extras(
-        context, user_id=user_id, tenant_id=tenant_id, data=kw)
+        context, extras_id=extras_id, data=kw)
 
-  def delete_extras(self, context, user_id, tenant_id):
+  def delete_extras(self, context, extras_id):
     return self.identity_api.delete_extras(
-        context, user_id=user_id, tenant_id=tenant_id)
+        context, extras_id=extras_id)
 
 
 class Router(wsgi.Router):

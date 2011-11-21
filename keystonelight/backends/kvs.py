@@ -1,5 +1,14 @@
+import logging
+
+
 class DictKvs(dict):
+  def get(self, key, default=None):
+    rv = super(DictKvs, self).get(key, default)
+    logging.debug('GET %s >> %s', key, rv)
+    return rv
+
   def set(self, key, value):
+    logging.debug('SET %s = %s', key, value)
     self[key] = value
 
   def delete(self, key):
@@ -35,7 +44,7 @@ class KvsIdentity(object):
 
     tenant_ref = self.get_tenant(tenant_id)
     if tenant_ref:
-      extras_ref = self.get_extras(user_id, tenant_id)
+      extras_ref = self.get_extras_by_user_tenant(user_id, tenant_id)
     else:
       extras_ref = {}
     return (user_ref, tenant_ref, extras_ref)
@@ -56,8 +65,11 @@ class KvsIdentity(object):
     user_ref = self.db.get('user_name-%s' % user_name)
     return user_ref
 
-  def get_extras(self, user_id, tenant_id):
-    return self.db.get('extras-%s-%s' % (tenant_id, user_id))
+  def get_extras(self, extras_id):
+    return self.db.get('extras-%s' % extras_id)
+
+  def get_extras_by_user_tenant(self, user_id, tenant_id):
+    return self.get_extras('user_tenant-%s-%s' % (user_id, tenant_id))
 
   def create_user(self, id, user):
     print user
@@ -98,16 +110,16 @@ class KvsIdentity(object):
     self.db.delete('tenant-%s' % id)
     return None
 
-  def create_extras(self, user_id, tenant_id, extras):
-    self.db.set('extras-%s-%s' % (tenant_id, user_id), extras)
+  def create_extras(self, extras_id, extras):
+    self.db.set('extras-%s' % extras_id, extras)
     return extras
 
-  def update_extras(self, user_id, tenant_id, extras):
-    self.db.set('extras-%s-%s' % (tenant_id, user_id), extras)
+  def update_extras(self, extras_id, extras):
+    self.db.set('extras-%s' % extras_id, extras)
     return extras
 
-  def delete_extras(self, user_id, tenant_id):
-    self.db.delete('extras-%s-%s' % (tenant_id, user_id))
+  def delete_extras(self, extras_id):
+    self.db.delete('extras-%s' % extras_id)
     return None
 
 

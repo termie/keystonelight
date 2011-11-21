@@ -56,7 +56,7 @@ class CompatTestCase(test.TestCase):
                     tenants=[self.tenant_345['id']],
                     password='password'))
     self.extras_123 = self.identity_backend.create_extras(
-        self.user_123['id'], self.tenant_345['id'],
+        'user_tenant-%s-%s' % (self.user_123['id'], self.tenant_345['id']),
         dict(roles=[{'id': '234',
                      'name': 'compute:admin'},
                     {'id': '235',

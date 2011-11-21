@@ -130,7 +130,7 @@ class KeystoneController(service.BaseApplication):
 
             tenant_ref = self.identity_api.get_tenant(context=context,
                                                       tenant_id=tenant_id)
-            extras_ref = self.identity_api.get_extras(
+            extras_ref = self.identity_api.get_extras_by_user_tenant(
                     context=context,
                     user_id=user_ref['id'],
                     tenant_id=tenant_ref['id'])

@@ -52,7 +52,7 @@ class NovaClientCompatMasterTestCase(CompatTestCase):
                     password='foo'))
 
     self.extras_bar_foo = self.identity_backend.create_extras(
-        self.user_foo['id'], self.tenant_bar['id'],
+        'user_tenant-%s-%s' % (self.user_foo['id'], self.tenant_bar['id']),
         dict(roles=[],
              roles_links=[]))
 
