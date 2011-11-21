@@ -52,10 +52,19 @@ class Manager(object):
         return False
 
     def _check_rule(rule, extra, creds):
+        # handle ANDs
         if type(rule) is type(tuple()) or type(rule) is type(list()):
             for x in rule:
                 if not self._check_rule(x, extra, creds):
                     return False
+            return True
+
+        real_rule = rule % extra
+        key, check = rule.split(':', 1)
+        if creds[key] == check:
+            return True
+
+        return False
 
 
 
