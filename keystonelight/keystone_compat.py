@@ -98,9 +98,12 @@ class KeystoneServiceRouter(wsgi.Router):
                        controller=auth_controller,
                        action='authenticate_ec2',
                        conditions=dict(methods=['POST']))
+
+        # Tenant Operations
+        tenant_controller = KeystoneTenantController(self.options)
         mapper.connect('/tenants',
-                       controller=auth_controller,
-                       action='get_tenants',
+                       controller=tenant_controller,
+                       action='get_tenants_for_token',
                        conditions=dict(methods=['GET']))
 
         # Miscellaneous
@@ -347,7 +350,7 @@ class KeystoneTenantController(service.BaseApplication):
         self.policy_api = policy.Manager(options)
         self.token_api = token.Manager(options)
 
-    def get_tenants_for_token(self, context):
+    def get_tenants_for_token(self, context, **kw):
         """Get valid tenants for token based on token used to authenticate.
 
         Pulls the token from the context, validates it and gets the valid
@@ -453,9 +456,13 @@ class KeystoneExtensionsController(service.BaseApplication):
         raise NotImplemented()
 
 
-def app_factory(global_conf, **local_conf):
+def service_app_factory(global_conf, **local_conf):
     conf = global_conf.copy()
     conf.update(local_conf)
-    # TODO(devcamcar): Return both KeystoneAdminRouter
-    # and KeystoneServiceRouter
+    return KeystoneServiceRouter(conf)
+
+
+def admin_app_factory(global_conf, **local_conf):
+    conf = global_conf.copy()
+    conf.update(local_conf)
     return KeystoneAdminRouter(conf)
