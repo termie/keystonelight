@@ -31,7 +31,7 @@ class KeystoneAdminRouter(wsgi.Router):
         mapper.connect('/tokens/{token_id}/endpoints',
                        controller=auth_controller,
                        action='endpoints',
-                       condition=dict(method=['GET']))
+                       conditions=dict(method=['GET']))
 
         # Tenant Operations
         tenant_controller = KeystoneTenantController(self.options)
@@ -42,7 +42,7 @@ class KeystoneAdminRouter(wsgi.Router):
         mapper.connect('/tenants/{tenant_id}',
                        controller=tenant_controller,
                        action='get_tenant',
-                       condition=dict(method=['GET']))
+                       conditions=dict(method=['GET']))
         mapper.connect('/tenants',
                        controller=tenant_controller,
                        action='create_tenant',
@@ -64,7 +64,7 @@ class KeystoneAdminRouter(wsgi.Router):
         mapper.connect('/users/{user_id}/roles',
                        controller=user_controller,
                        action='get_user_roles',
-                       condition=dict(method=['GET']))
+                       conditions=dict(method=['GET']))
 
         # Miscellaneous Operations
         version_controller = KeystoneVersionController(self.options)
@@ -97,14 +97,14 @@ class KeystoneServiceRouter(wsgi.Router):
         mapper.connect('/ec2tokens',
                        controller=auth_controller,
                        action='authenticate_ec2',
-                       conditions=dict(methods=['POST']))
+                       conditions=dict(method=['POST']))
 
         # Tenant Operations
         tenant_controller = KeystoneTenantController(self.options)
         mapper.connect('/tenants',
                        controller=tenant_controller,
                        action='get_tenants_for_token',
-                       conditions=dict(methods=['GET']))
+                       conditions=dict(method=['GET']))
 
         # Miscellaneous
         version_controller = KeystoneVersionController(self.options)

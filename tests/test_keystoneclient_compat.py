@@ -1,3 +1,5 @@
+import logging
+
 from keystonelight import test
 
 import default_fixtures
@@ -13,27 +15,22 @@ class CompatTestCase(test.TestCase):
     def _public_url(self):
         public_port = self.public_server.socket_info['socket'][1]
         self.options['public_port'] = public_port
-        # NOTE(termie): novaclient wants a "/" at the end, keystoneclient does not
-        return "http://localhost:%s/v2.0/" % public_port
+        return "http://localhost:%s/v2.0" % public_port
 
     def _admin_url(self):
         admin_port = self.admin_server.socket_info['socket'][1]
         self.options['admin_port'] = admin_port
-        # NOTE(termie): novaclient wants a "/" at the end, keystoneclient does not
-        return "http://localhost:%s/v2.0/" % admin_port
+        return "http://localhost:%s/v2.0" % admin_port
 
     def _client(self, **kwargs):
         from keystoneclient.v2_0 import client as ks_client
 
-        public_port = self.public_server.socket_info['socket'][1]
-        admin_port = self.admin_server.socket_info['socket'][1]
-
-        self.options['public_port'] = public_port
-        self.options['admin_port'] = admin_port
         kc = ks_client.Client(endpoint=self._admin_url(),
                               auth_url=self._public_url(),
                               **kwargs)
         kc.authenticate()
+        # have to manually overwrite the management url after authentication
+        kc.management_url = self._admin_url()
         return kc
 
 
@@ -50,7 +47,7 @@ class MasterCompatTestCase(CompatTestCase):
         self.public_app = self.loadapp('keystoneclient_compat_master',
                                         name='main')
         self.admin_app = self.loadapp('keystoneclient_compat_master',
-                                      name='keystone_admin')
+                                      name='admin')
 
         self.load_backends()
         self.load_fixtures(default_fixtures)
@@ -58,7 +55,7 @@ class MasterCompatTestCase(CompatTestCase):
         self.public_server = self.serveapp('keystoneclient_compat_master',
                                            name='main')
         self.admin_server = self.serveapp('keystoneclient_compat_master',
-                                          name='keystone_admin')
+                                          name='admin')
 
         # TODO(termie): is_admin is being deprecated once the policy stuff
         #               is all working
