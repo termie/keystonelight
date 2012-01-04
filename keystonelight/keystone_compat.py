@@ -164,6 +164,7 @@ class KeystoneAdminCrudExtension(wsgi.ExtensionRouter):
                     controller=user_controller,
                     action="create_user",
                     conditions=dict(method=["POST"]))
+        # NOTE(termie): not in diablo
         mapper.connect("/users/{user_id}",
                     controller=user_controller,
                     action="update_user",
@@ -571,6 +572,10 @@ class KeystoneUserController(service.BaseApplication):
     def get_extensions_info(self, context):
         raise NotImplemented()
 
+    # CRUD extension
+    def create_user(self, context, user):
+
+
 
 class KeystoneRoleController(service.BaseApplication):
     def __init__(self, options):
@@ -648,7 +653,6 @@ class KeystoneRoleController(service.BaseApplication):
         if not roles:
             self.identity_api.remove_user_from_tenant(
                     context, tenant_id, user_id)
-
 
 
 class KeystoneServiceController(service.BaseApplication):
