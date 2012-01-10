@@ -21,17 +21,31 @@ class Config(cfg.ConfigOpts):
 
 
 def register_str(*args, **kw):
-  group = kw.pop('group', None)
-  if group:
-    CONF.register_group(cfg.OptGroup(name=group))
+  group = _ensure_group(kw)
   return CONF.register_opt(cfg.StrOpt(*args, **kw), group=group)
 
 
 def register_cli_str(*args, **kw):
+  group = _ensure_group(kw)
+  return CONF.register_cli_opt(cfg.StrOpt(*args, **kw), group=group)
+
+
+def register_bool(*args, **kw):
+  group = _ensure_group(kw)
+  return CONF.register_opt(cfg.BoolOpt(*args, **kw), group=group)
+
+
+def register_cli_bool(*args, **kw):
+  group = _ensure_group(kw)
+  return CONF.register_cli_opt(cfg.BoolOpt(*args, **kw), group=group)
+
+
+def _ensure_group(kw):
   group = kw.pop('group', None)
   if group:
     CONF.register_group(cfg.OptGroup(name=group))
-  return CONF.register_cli_opt(cfg.StrOpt(*args, **kw), group=group)
+  return group
+
 
 
 CONF = Config(project='keystone')
