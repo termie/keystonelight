@@ -5,7 +5,7 @@ import os
 from keystone import cfg
 
 
-class Config(cfg.ConfigOpts):
+class Config(cfg.CommonConfigOpts):
   def __call__(self, config_files=None, *args, **kw):
     if config_files is not None:
       self._opts['config_file']['opt'].default = config_files
