@@ -6,8 +6,8 @@ from keystone import cfg
 class Config(cfg.ConfigOpts):
   def __call__(self, config_files=None, *args, **kw):
     if config_files is not None:
-      self.config_file = config_files
-    super(Config, self).__call__(*args, **kw)
+      self._opts['config_file']['opt'].default = config_files
+    return super(Config, self).__call__(*args, **kw)
 
   def __getitem__(self, key, default=None):
     return getattr(self, key, default)
@@ -25,6 +25,13 @@ def register_str(*args, **kw):
   if group:
     CONF.register_group(cfg.OptGroup(name=group))
   return CONF.register_opt(cfg.StrOpt(*args, **kw), group=group)
+
+
+def register_cli_str(*args, **kw):
+  group = kw.pop('group', None)
+  if group:
+    CONF.register_group(cfg.OptGroup(name=group))
+  return CONF.register_cli_opt(cfg.StrOpt(*args, **kw), group=group)
 
 
 CONF = Config(project='keystone')
