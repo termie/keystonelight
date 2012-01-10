@@ -6,28 +6,27 @@ from keystone import cfg
 
 
 class Config(cfg.CommonConfigOpts):
-  def __call__(self, config_files=None, *args, **kw):
-    if config_files is not None:
-      self._opts['config_file']['opt'].default = config_files
-    return super(Config, self).__call__(*args, **kw)
+    def __call__(self, config_files=None, *args, **kw):
+        if config_files is not None:
+            self._opts['config_file']['opt'].default = config_files
+        return super(Config, self).__call__(*args, **kw)
 
-  def __getitem__(self, key, default=None):
-    return getattr(self, key, default)
+    def __getitem__(self, key, default=None):
+        return getattr(self, key, default)
 
-  def __setitem__(self, key, value):
-    return setattr(self, key, value)
+    def __setitem__(self, key, value):
+        return setattr(self, key, value)
 
-  def iteritems(self):
-    for k in self._opts:
-      yield (k, getattr(self, k))
+    def iteritems(self):
+        for k in self._opts:
+            yield (k, getattr(self, k))
 
 
 def register_str(*args, **kw):
-  group = kw.pop('group', None)
-  if group:
-    CONF.register_group(cfg.OptGroup(name=group))
-  return CONF.register_opt(cfg.StrOpt(*args, **kw), group=group)
-
+    group = kw.pop('group', None)
+    if group:
+        CONF.register_group(cfg.OptGroup(name=group))
+    return CONF.register_opt(cfg.StrOpt(*args, **kw), group=group)
 
 
 def register_cli_str(*args, **kw):
