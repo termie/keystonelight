@@ -77,7 +77,6 @@ def setup_logging(conf):
 
 CONF = Config(project='keystone')
 
-
 register_str('admin_token', default='ADMIN')
 register_str('compute_port')
 register_str('admin_port')
