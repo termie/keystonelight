@@ -32,6 +32,8 @@ def create_server(conf, name, port):
 
 def serve(*servers):
     for server in servers:
+        logging.debug("starting server %s on port %s", server.application,
+                                                       server.port)
         server.start()
 
     for server in servers:
