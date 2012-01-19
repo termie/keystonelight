@@ -54,6 +54,7 @@ def checkout_vendor(repo, rev):
                 return revdir
 
         if not os.path.exists(revdir):
+            print "clone:", repo, revdir
             utils.git('clone', repo, revdir)
 
         cd(revdir)

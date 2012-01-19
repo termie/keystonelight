@@ -1,3 +1,4 @@
+# keystonelight dependencies
 pam==0.1.4
 WebOb==0.9.8
 eventlet==0.9.12
@@ -7,6 +8,16 @@ routes
 pycli
 sqlalchemy
 sqlalchemy-migrate
-pycli
 
--e git+https://github.com/openstack/python-keystoneclient.git#egg=python-keystoneclient
+# for python-novaclient
+prettytable
+
+nose
+tissue
+coverage
+nosexcover
+pep8==0.6.1
+sphinx>=1.1.2
+
+-e git+https://review.openstack.org/p/openstack/python-keystoneclient.git#egg=python-keystoneclient
+-e git+https://review.openstack.org/p/openstack-dev/openstack-nose.git#egg=openstack.nose_plugin
