@@ -35,91 +35,92 @@ config.register_cli_bool('id-only',
 
 
 class BaseApp(cli.log.LoggingApp):
-  def __init__(self, *args, **kw):
-    kw.setdefault('name', self.__class__.__name__.lower())
-    super(BaseApp, self).__init__(*args, **kw)
+    def __init__(self, *args, **kw):
+        kw.setdefault('name', self.__class__.__name__.lower())
+        super(BaseApp, self).__init__(*args, **kw)
 
-  def add_default_params(self):
-    for args, kw in DEFAULT_PARAMS:
-      self.add_param(*args, **kw)
+    def add_default_params(self):
+        for args, kw in DEFAULT_PARAMS:
+            self.add_param(*args, **kw)
 
-  def _parse_keyvalues(self, args):
-    kv = {}
-    for x in args:
-      key, value = x.split('=', 1)
-      # make lists if there are multiple values
-      if key.endswith('[]'):
-        key = key[:-2]
-        existing = kv.get(key, [])
-        existing.append(value)
-        kv[key] = existing
-      else:
-        kv[key] = value
-    return kv
+    def _parse_keyvalues(self, args):
+        kv = {}
+        for x in args:
+            key, value = x.split('=', 1)
+            # make lists if there are multiple values
+            if key.endswith('[]'):
+                key = key[:-2]
+                existing = kv.get(key, [])
+                existing.append(value)
+                kv[key] = existing
+            else:
+                kv[key] = value
+        return kv
 
 
 class DbSync(BaseApp):
-  name = 'db_sync'
+    name = 'db_sync'
 
-  def __init__(self, *args, **kw):
-    super(DbSync, self).__init__(*args, **kw)
+    def __init__(self, *args, **kw):
+        super(DbSync, self).__init__(*args, **kw)
 
-  def main(self):
-    for k in ['identity', 'catalog', 'policy', 'token']:
-      driver = utils.import_object(getattr(CONF, k).driver)
-      if hasattr(driver, 'db_sync'):
-        driver.db_sync()
+    def main(self):
+        for k in ['identity', 'catalog', 'policy', 'token']:
+            driver = utils.import_object(getattr(CONF, k).driver)
+            if hasattr(driver, 'db_sync'):
+                driver.db_sync()
 
 
 class ClientCommand(BaseApp):
-  ACTION_MAP = None
+    ACTION_MAP = None
 
-  def __init__(self, *args, **kw):
-    super(ClientCommand, self).__init__(*args, **kw)
-    if not self.ACTION_MAP:
-      self.ACTION_MAP = {}
-    self.add_param('action')
-    self.add_param('keyvalues', nargs='*')
-    self.client = kc.Client(CONF.ks.endpoint, token=CONF.ks.token)
-    self.handle = getattr(self.client, '%ss' % self.__class__.__name__.lower())
-    self._build_action_map()
+    def __init__(self, *args, **kw):
+        super(ClientCommand, self).__init__(*args, **kw)
+        if not self.ACTION_MAP:
+            self.ACTION_MAP = {}
+        self.add_param('action')
+        self.add_param('keyvalues', nargs='*')
+        self.client = kc.Client(CONF.ks.endpoint, token=CONF.ks.token)
+        self.handle = getattr(self.client, '%ss' % \
+                              self.__class__.__name__.lower())
+        self._build_action_map()
 
-  def _build_action_map(self):
-    actions = {}
-    for k in dir(self.handle):
-      if not k.startswith('_'):
-        actions[k] = k
-    self.ACTION_MAP.update(actions)
+    def _build_action_map(self):
+        actions = {}
+        for k in dir(self.handle):
+            if not k.startswith('_'):
+                actions[k] = k
+        self.ACTION_MAP.update(actions)
 
-  def main(self):
-    """Given some keyvalues create the appropriate data in Keystone."""
-    action_name = self.ACTION_MAP[self.params.action]
-    kv = self._parse_keyvalues(self.params.keyvalues)
-    resp = getattr(self.handle, action_name)(**kv)
-    if CONF.ks.id_only and getattr(resp, 'id'):
-      print resp.id
-      return
-    print resp
+    def main(self):
+        """Given some keyvalues create the appropriate data in Keystone."""
+        action_name = self.ACTION_MAP[self.params.action]
+        kv = self._parse_keyvalues(self.params.keyvalues)
+        resp = getattr(self.handle, action_name)(**kv)
+        if CONF.ks.id_only and getattr(resp, 'id'):
+            print resp.id
+            return
+        print resp
 
 
 class Role(ClientCommand):
-  pass
+    pass
 
 
 class Service(ClientCommand):
-  pass
+    pass
 
 
 class Token(ClientCommand):
-  pass
+    pass
 
 
 class Tenant(ClientCommand):
-  pass
+    pass
 
 
 class User(ClientCommand):
-  pass
+    pass
 
 
 CMDS = {'db_sync': DbSync,
@@ -132,21 +133,21 @@ CMDS = {'db_sync': DbSync,
 
 
 def main(argv=None):
-  if argv is None:
-    argv = sys.argv
+    if argv is None:
+        argv = sys.argv
 
-  dev_conf = os.path.join(possible_topdir,
-                          'etc',
-                          'keystone.conf')
-  config_files = None
-  if os.path.exists(dev_conf):
-      config_files = [dev_conf]
+    dev_conf = os.path.join(possible_topdir,
+                            'etc',
+                            'keystone.conf')
+    config_files = None
+    if os.path.exists(dev_conf):
+            config_files = [dev_conf]
 
-  args = CONF(config_files=config_files, args=argv)
-  cmd = args[1]
-  if cmd in CMDS:
-    CMDS[cmd](argv=(args[:1] + args[2:])).run()
+    args = CONF(config_files=config_files, args=argv)
+    cmd = args[1]
+    if cmd in CMDS:
+        CMDS[cmd](argv=(args[:1] + args[2:])).run()
 
 
 if __name__ == '__main__':
-  main()
+    main()
