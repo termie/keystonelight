@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>keystone-manage &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="../index.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">keystone-manage</a><ul>
+<li><a class="reference internal" href="#keystone-management-utility">Keystone Management Utility</a><ul>
+<li><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li><a class="reference internal" href="#usage">USAGE</a><ul>
+<li><a class="reference internal" href="#user">user</a></li>
+<li><a class="reference internal" href="#tenant">tenant</a></li>
+<li><a class="reference internal" href="#role">role</a></li>
+<li><a class="reference internal" href="#service">service</a></li>
+<li><a class="reference internal" href="#endpointtemplate">endpointTemplate</a></li>
+<li><a class="reference internal" href="#token">token</a></li>
+<li><a class="reference internal" href="#endpoint">endpoint</a></li>
+<li><a class="reference internal" href="#credentials">credentials</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#options">OPTIONS</a></li>
+<li><a class="reference internal" href="#logging-options">Logging Options:</a></li>
+<li><a class="reference internal" href="#files">FILES</a></li>
+<li><a class="reference internal" href="#see-also">SEE ALSO</a></li>
+<li><a class="reference internal" href="#source">SOURCE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/man/keystone-manage.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="keystone-manage">
+<h1>keystone-manage<a class="headerlink" href="#keystone-manage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="keystone-management-utility">
+<h2>Keystone Management Utility<a class="headerlink" href="#keystone-management-utility" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body"><a class="reference external" href="mailto:keystone&#37;&#52;&#48;lists&#46;launchpad&#46;net">keystone<span>&#64;</span>lists<span>&#46;</span>launchpad<span>&#46;</span>net</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">2010-11-16</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body">OpenStack LLC</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body">0.1.2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Manual section:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Manual group:</th><td class="field-body">cloud computing</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="synopsis">
+<h3>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>keystone-manage [options]</div></blockquote>
+</div>
+<div class="section" id="description">
+<h3>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h3>
+<p>keystone-manage is the command line tool that interacts with the keystone
+service to configure Keystone</p>
+</div>
+<div class="section" id="usage">
+<h3>USAGE<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><tt class="docutils literal"><span class="pre">keystone-manage</span> <span class="pre">[options]</span> <span class="pre">type</span> <span class="pre">action</span> <span class="pre">[additional</span> <span class="pre">args]</span></tt></div></blockquote>
+<div class="section" id="user">
+<h4>user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first"><strong>user add</strong> [username] [password]</p>
+<p>adds a user to Keystone&#8217;s data store</p>
+</li>
+<li><p class="first"><strong>user list</strong></p>
+<p>lists all users</p>
+</li>
+<li><p class="first"><strong>user disable</strong> [username]</p>
+<p>disables the user <em>username</em></p>
+</li>
+</ul>
+</div>
+<div class="section" id="tenant">
+<h4>tenant<a class="headerlink" href="#tenant" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first"><strong>tenant add</strong> [tenant_name]</p>
+<p>adds a tenant to Keystone&#8217;s data store</p>
+</li>
+<li><p class="first"><strong>tenant list</strong></p>
+<p>lists all users</p>
+</li>
+<li><p class="first"><strong>tenant disable</strong> [tenant_name]</p>
+</li>
+</ul>
+</div>
+<div class="section" id="role">
+<h4>role<a class="headerlink" href="#role" title="Permalink to this headline">¶</a></h4>
+<p>Roles are used to associated users to tenants. Two roles are defined related
+to the Keystone service in it&#8217;s configuration file <tt class="xref doc docutils literal"><span class="pre">../keystone.conf</span></tt></p>
+<ul>
+<li><p class="first"><strong>role add</strong> [role_name]</p>
+<p>adds a role</p>
+</li>
+<li><p class="first"><strong>role list</strong> ([tenant_name])</p>
+<p>lists all roles, or all roles for tenant, if tenant_name is provided</p>
+</li>
+<li><p class="first"><strong>role grant</strong> [role_name] [username] ([tenant])</p>
+<p>grants a role to a specific user. Granted globally if tenant_name is not
+provided or granted for a specific tenant if tenant_name is provided.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="service">
+<h4>service<a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first"><strong>service add</strong> [name] [type] [description] [owner_id]</p>
+<p>adds a service</p>
+</li>
+<li><p class="first"><strong>service list</strong></p>
+<p>lists all services with id, name, and type</p>
+</li>
+</ul>
+</div>
+<div class="section" id="endpointtemplate">
+<h4>endpointTemplate<a class="headerlink" href="#endpointtemplate" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first"><strong>endpointTemplate add</strong> [region] [service_name] [public_url] [admin_url] [internal_url] [enabled] [is_global]</p>
+<p>Add a service endpoint for keystone.</p>
+<p>example:</p>
+<div class="highlight-python"><pre>keystone-manage endpointTemplates add RegionOne \
+                keystone \
+                http://keystone_host:5000/v2.0 \
+                http://keystone_host:35357/v2.0 \
+                http://keystone_host:5000/v2.0 \
+                1 1</pre>
+</div>
+</li>
+<li><p class="first"><strong>endpointTemplate list</strong> ([tenant_name])</p>
+<p>lists endpoint templates with service, region, and public_url. Restricted to
+tenant endpoints if tenant_name is provided.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="token">
+<h4>token<a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first"><strong>token add</strong> [token] [username] [tenant] [expiration]</p>
+<p>adds a token for a given user and tenant with an expiration</p>
+</li>
+<li><p class="first"><strong>token list</strong></p>
+<p>lists all tokens</p>
+</li>
+<li><p class="first"><strong>token delete</strong> [token]</p>
+<p>deletes the identified token</p>
+</li>
+</ul>
+</div>
+<div class="section" id="endpoint">
+<h4>endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first"><strong>endpoint add</strong> [tenant_name] [endpoint_template]</p>
+<p>adds a tenant-specific endpoint</p>
+</li>
+</ul>
+</div>
+<div class="section" id="credentials">
+<h4>credentials<a class="headerlink" href="#credentials" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>credentials add</strong> [username] [type] [key] [password] ([tenant_name])</li>
+</ul>
+</div>
+</div>
+<div class="section" id="options">
+<h3>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--version</span></kbd></td>
+<td>show program&#8217;s version number and exit</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>show this help message and exit</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-v</span>, <span class="option">--verbose</span></kbd></td>
+<td>Print more verbose output</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-d</span>, <span class="option">--debug</span></kbd></td>
+<td>Print debugging output to console</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-c <var>PATH</var></span>, <span class="option">--config-file=<var>PATH</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Path to the config file to use. When not
+specified (the default), we generally look at
+the first argument specified to be a config
+file, and if that is also missing, we search
+standard directories for a config file.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-p <var>BIND_PORT</var></span>, <span class="option">--port=<var>BIND_PORT</var></span>, <span class="option">--bind-port=<var>BIND_PORT</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>specifies port to listen on (default is 5000)</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--host=<var>BIND_HOST</var></span>, <span class="option">--bind-host=<var>BIND_HOST</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>specifies host address to listen on (default
+is all or 0.0.0.0)</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-t</span>, <span class="option">--trace-calls</span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Turns on call tracing for troubleshooting</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-a <var>PORT</var></span>, <span class="option">--admin-port=<var>PORT</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Specifies port for Admin API to listen on
+(default is 35357)</td></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="logging-options">
+<h3>Logging Options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<p>The following configuration options are specific to logging
+functionality for this program.</p>
+<blockquote>
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log-config=<var>PATH</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>If this option is specified, the logging
+configuration file specified is used and
+overrides any other logging options specified.
+Please see the Python logging module
+documentation for details on logging
+configuration files.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log-date-format=<var>FORMAT</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>Format string for %(asctime)s in log records.
+Default: %Y-%m-%d %H:%M:%S</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log-file=<var>PATH</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>(Optional) Name of log file to output to. If
+not set, logging will go to stdout.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--log-dir=<var>LOG_DIR</var></span></kbd></td>
+</tr>
+<tr><td>&nbsp;</td><td>(Optional) The directory to keep log files in
+(will be prepended to &#8211;logfile)</td></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="files">
+<h3>FILES<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+<div class="section" id="see-also">
+<h3>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://github.com/openstack/keystone">Keystone</a></li>
+</ul>
+</div>
+<div class="section" id="source">
+<h3>SOURCE<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Keystone is sourced in GitHub <a class="reference external" href="http://github.com/openstack/keystone">Keystone</a></li>
+<li>Keystone bugs are managed at Launchpad <a class="reference external" href="https://bugs.launchpad.net/keystone">Launchpad Keystone</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

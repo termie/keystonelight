@@ -1,0 +1,19 @@
+backends Package
+================
+
+:mod:`kvs` Module
+-----------------
+
+.. automodule:: keystone.catalog.backends.kvs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`templated` Module
+-----------------------
+
+.. automodule:: keystone.catalog.backends.templated
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

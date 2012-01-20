@@ -1,0 +1,205 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing Keystone &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <link rel="next" title="Developing with Keystone" href="developing.html" />
+    <link rel="prev" title="Getting Involved" href="community.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developing.html" title="Developing with Keystone"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="community.html" title="Getting Involved"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Testing Keystone</a><ul>
+<li><a class="reference internal" href="#running-built-in-tests">Running Built-In Tests</a></li>
+<li><a class="reference internal" href="#testing-schema-migrations">Testing Schema Migrations</a></li>
+<li><a class="reference internal" href="#writing-tests">Writing Tests</a><ul>
+<li><a class="reference internal" href="#functional-tests">Functional Tests</a></li>
+<li><a class="reference internal" href="#testing-multiple-configurations">Testing Multiple Configurations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-testing">Further Testing</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="community.html"
+                                  title="previous chapter">Getting Involved</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="developing.html"
+                                  title="next chapter">Developing with Keystone</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/testing.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testing-keystone">
+<h1>Testing Keystone<a class="headerlink" href="#testing-keystone" title="Permalink to this headline">¶</a></h1>
+<p>Keystone uses a number of testing methodologies to ensure correctness.</p>
+<div class="section" id="running-built-in-tests">
+<h2>Running Built-In Tests<a class="headerlink" href="#running-built-in-tests" title="Permalink to this headline">¶</a></h2>
+<p>To run the full suites of tests maintained within Keystone, run:</p>
+<div class="highlight-python"><pre>$ ./run_tests.sh --with-progress</pre>
+</div>
+<p>This shows realtime feedback during test execution, and iterates over
+multiple configuration variations.</p>
+<p>This differs from how tests are executed from the continuous integration
+environment. Specifically, Jenkins doesn&#8217;t care about realtime progress,
+and aborts after the first test failure (a fail-fast behavior):</p>
+<div class="highlight-python"><pre>$ ./run_tests.sh</pre>
+</div>
+</div>
+<div class="section" id="testing-schema-migrations">
+<h2>Testing Schema Migrations<a class="headerlink" href="#testing-schema-migrations" title="Permalink to this headline">¶</a></h2>
+<p>The application of schema migrations can be tested using SQLAlchemy Migrate’s built-in test runner, one migration at a time.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This may leave your database in an inconsistent state; attempt this in non-production environments only!</p>
+</div>
+<p>This is useful for testing the <em>next</em> migration in sequence (both forward &amp; backward) in a database under version control:</p>
+<div class="highlight-python"><pre>$ python keystone/backends/sqlalchemy/migrate_repo/manage.py test --url=sqlite:///test.db --repository=keystone/backends/sqlalchemy/migrate_repo/</pre>
+</div>
+<p>This command refers to a SQLite database used for testing purposes. Depending on the migration, this command alone does not make assertions as to the integrity of your data during migration.</p>
+</div>
+<div class="section" id="writing-tests">
+<h2>Writing Tests<a class="headerlink" href="#writing-tests" title="Permalink to this headline">¶</a></h2>
+<p>Tests are maintained in the <tt class="docutils literal"><span class="pre">keystone.test</span></tt> module. Unit tests are
+isolated from functional tests.</p>
+<div class="section" id="functional-tests">
+<h3>Functional Tests<a class="headerlink" href="#functional-tests" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">keystone.test.functional.common</span></tt> module provides a <tt class="docutils literal"><span class="pre">unittest</span></tt>-based
+<tt class="docutils literal"><span class="pre">httplib</span></tt> client which you can extend and use for your own tests.
+Generally, functional tests should serve to illustrate intended use cases
+and API behaviors. To help make your tests easier to read, the test client:</p>
+<ul class="simple">
+<li>Authenticates with a known user name and password combination</li>
+<li>Asserts 2xx HTTP status codes (unless told otherwise)</li>
+<li>Abstracts keystone REST verbs &amp; resources into single function calls</li>
+</ul>
+</div>
+<div class="section" id="testing-multiple-configurations">
+<h3>Testing Multiple Configurations<a class="headerlink" href="#testing-multiple-configurations" title="Permalink to this headline">¶</a></h3>
+<p>Several variations of the default configuration are iterated over to
+ensure test coverage of mutually exclusive featuresets, such as the
+various backend options.</p>
+<p>These configuration templates are maintained in <tt class="docutils literal"><span class="pre">keystone/test/etc</span></tt> and
+are iterated over by <tt class="docutils literal"><span class="pre">run_tests.py</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="further-testing">
+<h2>Further Testing<a class="headerlink" href="#further-testing" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://devstack.org/">devstack</a> is the <em>best</em> way to quickly deploy keystone with the rest of the
+OpenStack universe and should be critical step in your development workflow!</p>
+<p>You may also be interested in either the <a class="reference external" href="https://github.com/openstack/openstack-ci">OpenStack Continuous Integration Project</a>
+or the <a class="reference external" href="https://github.com/openstack/openstack-integration-tests">OpenStack Integration Testing Project</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developing.html" title="Developing with Keystone"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="community.html" title="Getting Involved"
+             >previous</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

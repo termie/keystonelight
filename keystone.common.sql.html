@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sql Package &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">sql Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">sql</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-keystone.common.sql.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.sql.migration"><tt class="docutils literal"><span class="pre">migration</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.sql.util"><tt class="docutils literal"><span class="pre">util</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/keystone.common.sql.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sql-package">
+<h1>sql Package<a class="headerlink" href="#sql-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">sql</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-keystone.common.sql"></span></div>
+<div class="section" id="module-keystone.common.sql.core">
+<span id="core-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#module-keystone.common.sql.core" title="Permalink to this headline">¶</a></h2>
+<p>SQL backends for the various services.</p>
+<dl class="class">
+<dt id="keystone.common.sql.core.Base">
+<em class="property">class </em><tt class="descclassname">keystone.common.sql.core.</tt><tt class="descname">Base</tt><a class="headerlink" href="#keystone.common.sql.core.Base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="keystone.common.sql.core.Base.get_engine">
+<tt class="descname">get_engine</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.sql.core.Base.get_engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a SQLAlchemy engine.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.Base.get_maker">
+<tt class="descname">get_maker</tt><big>(</big><em>engine</em>, <em>autocommit=True</em>, <em>expire_on_commit=False</em><big>)</big><a class="headerlink" href="#keystone.common.sql.core.Base.get_maker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a SQLAlchemy sessionmaker using the given engine.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.Base.get_session">
+<tt class="descname">get_session</tt><big>(</big><em>autocommit=True</em>, <em>expire_on_commit=False</em><big>)</big><a class="headerlink" href="#keystone.common.sql.core.Base.get_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a SQLAlchemy session.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.sql.core.DictBase">
+<em class="property">class </em><tt class="descclassname">keystone.common.sql.core.</tt><tt class="descname">DictBase</tt><a class="headerlink" href="#keystone.common.sql.core.DictBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="keystone.common.sql.core.DictBase.get">
+<tt class="descname">get</tt><big>(</big><em>key</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#keystone.common.sql.core.DictBase.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.DictBase.iteritems">
+<tt class="descname">iteritems</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.sql.core.DictBase.iteritems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make the model object behave like a dict.</p>
+<p>Includes attributes from joins.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.DictBase.next">
+<tt class="descname">next</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.sql.core.DictBase.next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.DictBase.to_dict">
+<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.sql.core.DictBase.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.DictBase.update">
+<tt class="descname">update</tt><big>(</big><em>values</em><big>)</big><a class="headerlink" href="#keystone.common.sql.core.DictBase.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make the model object behave like a dict.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.sql.core.JsonBlob">
+<em class="property">class </em><tt class="descclassname">keystone.common.sql.core.</tt><tt class="descname">JsonBlob</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#keystone.common.sql.core.JsonBlob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.types.TypeDecorator</span></tt></p>
+<dl class="attribute">
+<dt id="keystone.common.sql.core.JsonBlob.impl">
+<tt class="descname">impl</tt><a class="headerlink" href="#keystone.common.sql.core.JsonBlob.impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Text</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.JsonBlob.process_bind_param">
+<tt class="descname">process_bind_param</tt><big>(</big><em>value</em>, <em>dialect</em><big>)</big><a class="headerlink" href="#keystone.common.sql.core.JsonBlob.process_bind_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.sql.core.JsonBlob.process_result_value">
+<tt class="descname">process_result_value</tt><big>(</big><em>value</em>, <em>dialect</em><big>)</big><a class="headerlink" href="#keystone.common.sql.core.JsonBlob.process_result_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.sql.migration">
+<span id="migration-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">migration</span></tt> Module<a class="headerlink" href="#module-keystone.common.sql.migration" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="keystone.common.sql.migration.db_sync">
+<tt class="descclassname">keystone.common.sql.migration.</tt><tt class="descname">db_sync</tt><big>(</big><em>version=None</em><big>)</big><a class="headerlink" href="#keystone.common.sql.migration.db_sync" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.sql.migration.db_version">
+<tt class="descclassname">keystone.common.sql.migration.</tt><tt class="descname">db_version</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.sql.migration.db_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.sql.migration.db_version_control">
+<tt class="descclassname">keystone.common.sql.migration.</tt><tt class="descname">db_version_control</tt><big>(</big><em>version=None</em><big>)</big><a class="headerlink" href="#keystone.common.sql.migration.db_version_control" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.sql.util">
+<span id="util-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">util</span></tt> Module<a class="headerlink" href="#module-keystone.common.sql.util" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="keystone.common.sql.util.setup_test_database">
+<tt class="descclassname">keystone.common.sql.util.</tt><tt class="descname">setup_test_database</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.sql.util.setup_test_database" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="keystone.common.sql.migrate_repo.html">migrate_repo Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#module-keystone.common.sql.migrate_repo.manage"><tt class="docutils literal"><span class="pre">manage</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html">versions Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html#module-keystone.common.sql.migrate_repo.versions.001_add_initial_tables"><tt class="docutils literal"><span class="pre">001_add_initial_tables</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

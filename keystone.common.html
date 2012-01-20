@@ -1,0 +1,1219 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>common Package &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">common Package</a><ul>
+<li><a class="reference internal" href="#module-keystone.common.bufferedhttp"><tt class="docutils literal"><span class="pre">bufferedhttp</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.cfg"><tt class="docutils literal"><span class="pre">cfg</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.logging"><tt class="docutils literal"><span class="pre">logging</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.manager"><tt class="docutils literal"><span class="pre">manager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.utils"><tt class="docutils literal"><span class="pre">utils</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.common.wsgi"><tt class="docutils literal"><span class="pre">wsgi</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/keystone.common.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="common-package">
+<h1>common Package<a class="headerlink" href="#common-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-keystone.common.bufferedhttp">
+<span id="bufferedhttp-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">bufferedhttp</span></tt> Module<a class="headerlink" href="#module-keystone.common.bufferedhttp" title="Permalink to this headline">¶</a></h2>
+<p>Monkey Patch httplib.HTTPResponse to buffer reads of headers. This can improve
+performance when making large numbers of small HTTP requests.  This module
+also provides helper functions to make HTTP connections using
+BufferedHTTPResponse.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you use this, be sure that the libraries you are using do not access
+the socket directly (xmlrpclib, I&#8217;m looking at you :/), and instead
+make all calls through httplib.</p>
+</div>
+<dl class="class">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPConnection">
+<em class="property">class </em><tt class="descclassname">keystone.common.bufferedhttp.</tt><tt class="descname">BufferedHTTPConnection</tt><big>(</big><em>host</em>, <em>port=None</em>, <em>strict=None</em>, <em>timeout=&lt;object object at 0x2b6d04eca510&gt;</em>, <em>source_address=None</em><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">httplib.HTTPConnection</span></tt></p>
+<p>HTTPConnection class that uses BufferedHTTPResponse</p>
+<dl class="method">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPConnection.connect">
+<tt class="descname">connect</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection.connect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPConnection.getexpect">
+<tt class="descname">getexpect</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection.getexpect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPConnection.getresponse">
+<tt class="descname">getresponse</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection.getresponse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPConnection.putrequest">
+<tt class="descname">putrequest</tt><big>(</big><em>method</em>, <em>url</em>, <em>skip_host=0</em>, <em>skip_accept_encoding=0</em><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection.putrequest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPConnection.response_class">
+<tt class="descname">response_class</tt><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection.response_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#keystone.common.bufferedhttp.BufferedHTTPResponse" title="keystone.common.bufferedhttp.BufferedHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">BufferedHTTPResponse</span></tt></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPResponse">
+<em class="property">class </em><tt class="descclassname">keystone.common.bufferedhttp.</tt><tt class="descname">BufferedHTTPResponse</tt><big>(</big><em>sock</em>, <em>debuglevel=0</em>, <em>strict=0</em>, <em>method=None</em><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">httplib.HTTPResponse</span></tt></p>
+<p>HTTPResponse class that buffers reading of headers</p>
+<dl class="method">
+<dt id="keystone.common.bufferedhttp.BufferedHTTPResponse.expect_response">
+<tt class="descname">expect_response</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPResponse.expect_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.bufferedhttp.http_connect">
+<tt class="descclassname">keystone.common.bufferedhttp.</tt><tt class="descname">http_connect</tt><big>(</big><em>ipaddr</em>, <em>port</em>, <em>device</em>, <em>partition</em>, <em>method</em>, <em>path</em>, <em>headers=None</em>, <em>query_string=None</em>, <em>ssl=False</em><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.http_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to create an HTTPConnection object. If ssl is set True,
+HTTPSConnection will be used. However, if ssl=False, BufferedHTTPConnection
+will be used, which is buffered for backend Swift services.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ipaddr</strong> &#8211; IPv4 address to connect to</li>
+<li><strong>port</strong> &#8211; port to connect to</li>
+<li><strong>device</strong> &#8211; device of the node to query</li>
+<li><strong>partition</strong> &#8211; partition on the device</li>
+<li><strong>method</strong> &#8211; HTTP method to request (&#8216;GET&#8217;, &#8216;PUT&#8217;, &#8216;POST&#8217;, etc.)</li>
+<li><strong>path</strong> &#8211; request path</li>
+<li><strong>headers</strong> &#8211; dictionary of headers</li>
+<li><strong>query_string</strong> &#8211; request query string</li>
+<li><strong>ssl</strong> &#8211; set True if SSL should be used (default: False)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">HTTPConnection object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.bufferedhttp.http_connect_raw">
+<tt class="descclassname">keystone.common.bufferedhttp.</tt><tt class="descname">http_connect_raw</tt><big>(</big><em>ipaddr</em>, <em>port</em>, <em>method</em>, <em>path</em>, <em>headers=None</em>, <em>query_string=None</em>, <em>ssl=False</em><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.http_connect_raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to create an HTTPConnection object. If ssl is set True,
+HTTPSConnection will be used. However, if ssl=False, BufferedHTTPConnection
+will be used, which is buffered for backend Swift services.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ipaddr</strong> &#8211; IPv4 address to connect to</li>
+<li><strong>port</strong> &#8211; port to connect to</li>
+<li><strong>method</strong> &#8211; HTTP method to request (&#8216;GET&#8217;, &#8216;PUT&#8217;, &#8216;POST&#8217;, etc.)</li>
+<li><strong>path</strong> &#8211; request path</li>
+<li><strong>headers</strong> &#8211; dictionary of headers</li>
+<li><strong>query_string</strong> &#8211; request query string</li>
+<li><strong>ssl</strong> &#8211; set True if SSL should be used (default: False)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">HTTPConnection object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.cfg">
+<span id="cfg-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">cfg</span></tt> Module<a class="headerlink" href="#module-keystone.common.cfg" title="Permalink to this headline">¶</a></h2>
+<p>Configuration options which may be set on the command line or in config files.</p>
+<p>The schema for each option is defined using the Opt sub-classes e.g.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>common_opts = [</dt>
+<dd><dl class="first last docutils">
+<dt>cfg.StrOpt(&#8216;bind_host&#8217;,</dt>
+<dd>default=&#8216;0.0.0.0&#8217;,
+help=&#8217;IP address to listen on&#8217;),</dd>
+<dt>cfg.IntOpt(&#8216;bind_port&#8217;,</dt>
+<dd>default=9292,
+help=&#8217;Port number to listen on&#8217;)</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</div></blockquote>
+<p>Options can be strings, integers, floats, booleans, lists or &#8216;multi strings&#8217;:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>enabled_apis_opt = </dt>
+<dd><dl class="first last docutils">
+<dt>cfg.ListOpt(&#8216;enabled_apis&#8217;,</dt>
+<dd>default=[&#8216;ec2&#8217;, &#8216;osapi&#8217;],
+help=&#8217;List of APIs to enable by default&#8217;)</dd>
+</dl>
+</dd>
+<dt>DEFAULT_EXTENSIONS = [</dt>
+<dd>&#8216;nova.api.openstack.contrib.standard_extensions&#8217;</dd>
+</dl>
+<p>]
+osapi_extension_opt = </p>
+<blockquote>
+<div><dl class="docutils">
+<dt>cfg.MultiStrOpt(&#8216;osapi_extension&#8217;,</dt>
+<dd>default=DEFAULT_EXTENSIONS)</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p>Option schemas are registered with with the config manager at runtime, but
+before the option is referenced:</p>
+<blockquote>
+<div><p>class ExtensionManager(object):</p>
+<blockquote>
+<div><p>enabled_apis_opt = cfg.ListOpt(...)</p>
+<dl class="docutils">
+<dt>def __init__(self, conf):</dt>
+<dd>self.conf = conf
+self.conf.register_opt(enabled_apis_opt)
+...</dd>
+<dt>def _load_extensions(self):</dt>
+<dd><dl class="first last docutils">
+<dt>for ext_factory in self.conf.osapi_extension:</dt>
+<dd></dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p>A common usage pattern is for each option schema to be defined in the module or
+class which uses the option:</p>
+<blockquote>
+<div><p>opts = ...</p>
+<dl class="docutils">
+<dt>def add_common_opts(conf):</dt>
+<dd>conf.register_opts(opts)</dd>
+<dt>def get_bind_host(conf):</dt>
+<dd>return conf.bind_host</dd>
+<dt>def get_bind_port(conf):</dt>
+<dd>return conf.bind_port</dd>
+</dl>
+</div></blockquote>
+<p>An option may optionally be made available via the command line. Such options
+must registered with the config manager before the command line is parsed (for
+the purposes of &#8211;help and CLI arg validation):</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>cli_opts = [</dt>
+<dd><dl class="first last docutils">
+<dt>cfg.BoolOpt(&#8216;verbose&#8217;,</dt>
+<dd>short=&#8217;v&#8217;,
+default=False,
+help=&#8217;Print more verbose output&#8217;),</dd>
+<dt>cfg.BoolOpt(&#8216;debug&#8217;,</dt>
+<dd>short=&#8217;d&#8217;,
+default=False,
+help=&#8217;Print debugging output&#8217;),</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+<dl class="docutils">
+<dt>def add_common_opts(conf):</dt>
+<dd>conf.register_cli_opts(cli_opts)</dd>
+</dl>
+</div></blockquote>
+<p>The config manager has a single CLI option defined by default, &#8211;config-file:</p>
+<blockquote>
+<div><p>class ConfigOpts(object):</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>config_file_opt = </dt>
+<dd><dl class="first last docutils">
+<dt>MultiStrOpt(&#8216;config-file&#8217;,</dt>
+<dd>...</dd>
+</dl>
+</dd>
+<dt>def __init__(self, ...):</dt>
+<dd>...
+self.register_cli_opt(self.config_file_opt)</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p>Option values are parsed from any supplied config files using SafeConfigParser.
+If none are specified, a default set is used e.g. glance-api.conf and
+glance-common.conf:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>glance-api.conf:</dt>
+<dd>[DEFAULT]
+bind_port = 9292</dd>
+<dt>glance-common.conf:</dt>
+<dd>[DEFAULT]
+bind_host = 0.0.0.0</dd>
+</dl>
+</div></blockquote>
+<p>Option values in config files override those on the command line. Config files
+are parsed in order, with values in later files overriding those in earlier
+files.</p>
+<p>The parsing of CLI args and config files is initiated by invoking the config
+manager e.g.</p>
+<blockquote>
+<div><p>conf = ConfigOpts()
+conf.register_opt(BoolOpt(&#8216;verbose&#8217;, ...))
+conf(sys.argv[1:])
+if conf.verbose:</p>
+<blockquote>
+<div>...</div></blockquote>
+</div></blockquote>
+<p>Options can be registered as belonging to a group:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>rabbit_group = cfg.OptionGroup(name=&#8217;rabbit&#8217;,</dt>
+<dd>title=&#8217;RabbitMQ options&#8217;)</dd>
+<dt>rabbit_host_opt = </dt>
+<dd><dl class="first last docutils">
+<dt>cfg.StrOpt(&#8216;host&#8217;,</dt>
+<dd>group=&#8217;rabbit&#8217;,
+default=&#8217;localhost&#8217;,
+help=&#8217;IP/hostname to listen on&#8217;),</dd>
+</dl>
+</dd>
+<dt>rabbit_port_opt = </dt>
+<dd><dl class="first last docutils">
+<dt>cfg.IntOpt(&#8216;port&#8217;,</dt>
+<dd>default=5672,
+help=&#8217;Port number to listen on&#8217;)</dd>
+</dl>
+</dd>
+<dt>rabbit_ssl_opt = </dt>
+<dd><dl class="first last docutils">
+<dt>conf.BoolOpt(&#8216;use_ssl&#8217;,</dt>
+<dd>default=False,
+help=&#8217;Whether to support SSL connections&#8217;)</dd>
+</dl>
+</dd>
+<dt>def register_rabbit_opts(conf):</dt>
+<dd>conf.register_group(rabbit_group)
+# options can be registered under a group in any of these ways:
+conf.register_opt(rabbit_host_opt)
+conf.register_opt(rabbit_port_opt, group=&#8217;rabbit&#8217;)
+conf.register_opt(rabbit_ssl_opt, group=rabbit_group)</dd>
+</dl>
+</div></blockquote>
+<p>If no group is specified, options belong to the &#8216;DEFAULT&#8217; section of config
+files:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>glance-api.conf:</dt>
+<dd><p class="first">[DEFAULT]
+bind_port = 9292
+...</p>
+<p class="last">[rabbit]
+host = localhost
+port = 5672
+use_ssl = False
+userid = guest
+password = guest
+virtual_host = /</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Command-line options in a group are automatically prefixed with the group name:</p>
+<blockquote>
+<div>&#8211;rabbit-host localhost &#8211;rabbit-use-ssl False</div></blockquote>
+<p>Option values in the default group are referenced as attributes/properties on
+the config manager; groups are also attributes on the config manager, with
+attributes for each of the options associated with the group:</p>
+<blockquote>
+<div><p>server.start(app, conf.bind_port, conf.bind_host, conf)</p>
+<dl class="docutils">
+<dt>self.connection = kombu.connection.BrokerConnection(</dt>
+<dd>hostname=conf.rabbit.host,
+port=conf.rabbit.port,
+...)</dd>
+</dl>
+</div></blockquote>
+<p>Option values may reference other values using PEP 292 string substitution:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>opts = [</dt>
+<dd><dl class="first last docutils">
+<dt>cfg.StrOpt(&#8216;state_path&#8217;,</dt>
+<dd>default=os.path.join(os.path.dirname(__file__), &#8216;../&#8217;),
+help=&#8217;Top-level directory for maintaining nova state&#8217;),</dd>
+<dt>cfg.StrOpt(&#8216;sqlite_db&#8217;,</dt>
+<dd>default=&#8217;nova.sqlite&#8217;,
+help=&#8217;file name for sqlite&#8217;),</dd>
+<dt>cfg.StrOpt(&#8216;sql_connection&#8217;,</dt>
+<dd>default=&#8217;sqlite:///$state_path/$sqlite_db&#8217;,
+help=&#8217;connection string for sql database&#8217;),</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</div></blockquote>
+<p>Note that interpolation can be avoided by using &#8216;$$&#8217;.</p>
+<dl class="exception">
+<dt id="keystone.common.cfg.ArgsAlreadyParsedError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">ArgsAlreadyParsedError</tt><big>(</big><em>msg=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ArgsAlreadyParsedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if a CLI opt is registered after parsing.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.BoolOpt">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">BoolOpt</tt><big>(</big><em>name</em>, <em>dest=None</em>, <em>short=None</em>, <em>default=None</em>, <em>metavar=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.BoolOpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Opt" title="keystone.common.cfg.Opt"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Opt</span></tt></a></p>
+<p>Bool opts are set to True or False on the command line using &#8211;optname or
+&#8211;noopttname respectively.</p>
+<p>In config files, boolean values are case insensitive and can be set using
+1/0, yes/no, true/false or on/off.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.CommonConfigOpts">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">CommonConfigOpts</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.ConfigOpts" title="keystone.common.cfg.ConfigOpts"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.ConfigOpts</span></tt></a></p>
+<dl class="attribute">
+<dt id="keystone.common.cfg.CommonConfigOpts.DEFAULT_LOG_DATE_FORMAT">
+<tt class="descname">DEFAULT_LOG_DATE_FORMAT</tt><em class="property"> = '%Y-%m-%d %H:%M:%S'</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.DEFAULT_LOG_DATE_FORMAT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="keystone.common.cfg.CommonConfigOpts.DEFAULT_LOG_FORMAT">
+<tt class="descname">DEFAULT_LOG_FORMAT</tt><em class="property"> = '%(asctime)s %(levelname)8s [%(name)s] %(message)s'</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.DEFAULT_LOG_FORMAT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="keystone.common.cfg.CommonConfigOpts.common_cli_opts">
+<tt class="descname">common_cli_opts</tt><em class="property"> = [&lt;keystone.common.cfg.BoolOpt object at 0x2986990&gt;, &lt;keystone.common.cfg.BoolOpt object at 0x29869d0&gt;]</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.common_cli_opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="keystone.common.cfg.CommonConfigOpts.logging_cli_opts">
+<tt class="descname">logging_cli_opts</tt><em class="property"> = [&lt;keystone.common.cfg.StrOpt object at 0x2986a10&gt;, &lt;keystone.common.cfg.StrOpt object at 0x2986a50&gt;, &lt;keystone.common.cfg.StrOpt object at 0x2986a90&gt;, &lt;keystone.common.cfg.StrOpt object at 0x2986ad0&gt;, &lt;keystone.common.cfg.StrOpt object at 0x2986b10&gt;, &lt;keystone.common.cfg.StrOpt object at 0x2986b50&gt;, &lt;keystone.common.cfg.BoolOpt object at 0x2986b90&gt;]</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.logging_cli_opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.ConfigFileParseError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">ConfigFileParseError</tt><big>(</big><em>config_file</em>, <em>msg</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigFileParseError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if there is an error parsing a config file.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.ConfigFileValueError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">ConfigFileValueError</tt><big>(</big><em>msg=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigFileValueError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if a config file value does not match its opt type.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.ConfigFilesNotFoundError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">ConfigFilesNotFoundError</tt><big>(</big><em>config_files</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigFilesNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if one or more config files are not found.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.ConfigOpts">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">ConfigOpts</tt><big>(</big><em>project=None</em>, <em>prog=None</em>, <em>version=None</em>, <em>usage=None</em>, <em>default_config_files=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Config options which may be set on the command line or in config files.</p>
+<p>ConfigOpts is a configuration option manager with APIs for registering
+option schemas, grouping options, parsing option values and retrieving
+the values of options.</p>
+<dl class="class">
+<dt id="keystone.common.cfg.ConfigOpts.GroupAttr">
+<em class="property">class </em><tt class="descname">GroupAttr</tt><big>(</big><em>conf</em>, <em>group</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.GroupAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A helper class representing the option values of a group as attributes.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.ConfigOpts.StrSubWrapper">
+<em class="property">class </em><tt class="descclassname">ConfigOpts.</tt><tt class="descname">StrSubWrapper</tt><big>(</big><em>conf</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.StrSubWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A helper class exposing opt values as a dict for string substitution.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.log_opt_values">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">log_opt_values</tt><big>(</big><em>logger</em>, <em>lvl</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.log_opt_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the value of all registered opts.</p>
+<p>It&#8217;s often useful for an app to log its configuration to a log file at
+startup for debugging. This method dumps to the entire config state to
+the supplied logger at a given log level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>logger</strong> &#8211; a logging.Logger object</li>
+<li><strong>lvl</strong> &#8211; the log level (e.g. logging.DEBUG) arg to logger.log()</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.print_usage">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">print_usage</tt><big>(</big><em>file=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.print_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the usage message for the current program.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.register_cli_opt">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">register_cli_opt</tt><big>(</big><em>opt</em>, <em>group=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.register_cli_opt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a CLI option schema.</p>
+<p>CLI option schemas must be registered before the command line and
+config files are parsed. This is to ensure that all CLI options are
+show in &#8211;help and option validation works as expected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>opt</strong> &#8211; an instance of an Opt sub-class</li>
+<li><strong>group</strong> &#8211; an optional OptGroup object or group name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">False if the opt was already register, True otherwise</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last">DuplicateOptError, ArgsAlreadyParsedError</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.register_cli_opts">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">register_cli_opts</tt><big>(</big><em>opts</em>, <em>group=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.register_cli_opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register multiple CLI option schemas at once.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.register_group">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">register_group</tt><big>(</big><em>group</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.register_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an option group.</p>
+<p>An option group must be registered before options can be registered
+with the group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>group</strong> &#8211; an OptGroup object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.register_opt">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">register_opt</tt><big>(</big><em>opt</em>, <em>group=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.register_opt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an option schema.</p>
+<p>Registering an option schema makes any option value which is previously
+or subsequently parsed from the command line or config files available
+as an attribute of this object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>opt</strong> &#8211; an instance of an Opt sub-class</li>
+<li><strong>group</strong> &#8211; an optional OptGroup object or group name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">False if the opt was already register, True otherwise</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last">DuplicateOptError</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.register_opts">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">register_opts</tt><big>(</big><em>opts</em>, <em>group=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.register_opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register multiple option schemas at once.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.reset">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">reset</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the state of the object to before it was called.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.set_default">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">set_default</tt><big>(</big><em>name</em>, <em>default</em>, <em>group=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.set_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override an opt&#8217;s default value.</p>
+<p>Override the default value of given option. A command line or
+config file value will still take precedence over this default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; the name/dest of the opt</li>
+<li><strong>default</strong> &#8211; the default value</li>
+<li><strong>group</strong> &#8211; an option OptGroup object or group name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last">NoSuchOptError, NoSuchGroupError</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.cfg.ConfigOpts.set_override">
+<tt class="descclassname">ConfigOpts.</tt><tt class="descname">set_override</tt><big>(</big><em>name</em>, <em>override</em>, <em>group=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ConfigOpts.set_override" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override an opt value.</p>
+<p>Override the command line, config file and default values of a
+given option.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; the name/dest of the opt</li>
+<li><strong>override</strong> &#8211; the override value</li>
+<li><strong>group</strong> &#8211; an option OptGroup object or group name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last">NoSuchOptError, NoSuchGroupError</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.DuplicateOptError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">DuplicateOptError</tt><big>(</big><em>opt_name</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.DuplicateOptError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if multiple opts with the same name are registered.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.Error">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">Error</tt><big>(</big><em>msg=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Base class for cfg exceptions.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.FloatOpt">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">FloatOpt</tt><big>(</big><em>name</em>, <em>dest=None</em>, <em>short=None</em>, <em>default=None</em>, <em>metavar=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.FloatOpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Opt" title="keystone.common.cfg.Opt"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Opt</span></tt></a></p>
+<p>Float opt values are converted to floats using the float() builtin.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.IntOpt">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">IntOpt</tt><big>(</big><em>name</em>, <em>dest=None</em>, <em>short=None</em>, <em>default=None</em>, <em>metavar=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.IntOpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Opt" title="keystone.common.cfg.Opt"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Opt</span></tt></a></p>
+<p>Int opt values are converted to integers using the int() builtin.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.ListOpt">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">ListOpt</tt><big>(</big><em>name</em>, <em>dest=None</em>, <em>short=None</em>, <em>default=None</em>, <em>metavar=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.ListOpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Opt" title="keystone.common.cfg.Opt"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Opt</span></tt></a></p>
+<p>List opt values are simple string values separated by commas. The opt value
+is a list containing these strings.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.MultiStrOpt">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">MultiStrOpt</tt><big>(</big><em>name</em>, <em>dest=None</em>, <em>short=None</em>, <em>default=None</em>, <em>metavar=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.MultiStrOpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Opt" title="keystone.common.cfg.Opt"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Opt</span></tt></a></p>
+<p>Multistr opt values are string opts which may be specified multiple times.
+The opt value is a list containing all the string values specified.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.NoSuchGroupError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">NoSuchGroupError</tt><big>(</big><em>group_name</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.NoSuchGroupError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if a group which doesn&#8217;t exist is referenced.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.NoSuchOptError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">NoSuchOptError</tt><big>(</big><em>opt_name</em>, <em>group=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.NoSuchOptError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if an opt which doesn&#8217;t exist is referenced.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.Opt">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">Opt</tt><big>(</big><em>name</em>, <em>dest=None</em>, <em>short=None</em>, <em>default=None</em>, <em>metavar=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.Opt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base class for all configuration options.</p>
+<p>An Opt object has no public methods, but has a number of public string
+properties:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>name:</dt>
+<dd>the name of the option, which may include hyphens</dd>
+<dt>dest:</dt>
+<dd>the (hyphen-less) ConfigOpts property which contains the option value</dd>
+<dt>short:</dt>
+<dd>a single character CLI option name</dd>
+<dt>default:</dt>
+<dd>the default value of the option</dd>
+<dt>metavar:</dt>
+<dd>the name shown as the argument to a CLI option in &#8211;help output</dd>
+<dt>help:</dt>
+<dd>an string explaining how the options value is used</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.OptGroup">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">OptGroup</tt><big>(</big><em>name</em>, <em>title=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.OptGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Represents a group of opts.</p>
+<p>CLI opts in the group are automatically prefixed with the group name.</p>
+<p>Each group corresponds to a section in config files.</p>
+<p>An OptGroup object has no public methods, but has a number of public string
+properties:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>name:</dt>
+<dd>the name of the group</dd>
+<dt>title:</dt>
+<dd>the group title as displayed in &#8211;help</dd>
+<dt>help:</dt>
+<dd>the group description as displayed in &#8211;help</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.cfg.StrOpt">
+<em class="property">class </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">StrOpt</tt><big>(</big><em>name</em>, <em>dest=None</em>, <em>short=None</em>, <em>default=None</em>, <em>metavar=None</em>, <em>help=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.StrOpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Opt" title="keystone.common.cfg.Opt"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Opt</span></tt></a></p>
+<p>String opts do not have their values transformed and are returned as
+str objects.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="keystone.common.cfg.TemplateSubstitutionError">
+<em class="property">exception </em><tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">TemplateSubstitutionError</tt><big>(</big><em>msg=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.TemplateSubstitutionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.cfg.Error" title="keystone.common.cfg.Error"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.Error</span></tt></a></p>
+<p>Raised if an error occurs substituting a variable in an opt value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.cfg.find_config_files">
+<tt class="descclassname">keystone.common.cfg.</tt><tt class="descname">find_config_files</tt><big>(</big><em>project=None</em>, <em>prog=None</em><big>)</big><a class="headerlink" href="#keystone.common.cfg.find_config_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of default configuration files.</p>
+<p>We default to two config files: [${project}.conf, ${prog}.conf]</p>
+<p>And we look for those config files in the following directories:</p>
+<blockquote>
+<div>~/.${project}/
+~/
+/etc/${project}/
+/etc/</div></blockquote>
+<p>We return an absolute path for (at most) one of each the default config
+files, for the topmost directory it exists in.</p>
+<p>For example, if project=foo, prog=bar and /etc/foo/foo.conf, /etc/bar.conf
+and ~/.foo/bar.conf all exist, then we return [&#8216;/etc/foo/foo.conf&#8217;,
+&#8216;~/.foo/bar.conf&#8217;]</p>
+<p>If no project name is supplied, we only look for ${prog.conf}.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>project</strong> &#8211; an optional project name</li>
+<li><strong>prog</strong> &#8211; the program name, defaulting to the basename of sys.argv[0]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.kvs">
+<span id="kvs-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">kvs</span></tt> Module<a class="headerlink" href="#module-keystone.common.kvs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="keystone.common.kvs.Base">
+<em class="property">class </em><tt class="descclassname">keystone.common.kvs.</tt><tt class="descname">Base</tt><big>(</big><em>db=None</em><big>)</big><a class="headerlink" href="#keystone.common.kvs.Base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.kvs.DictKvs">
+<em class="property">class </em><tt class="descclassname">keystone.common.kvs.</tt><tt class="descname">DictKvs</tt><a class="headerlink" href="#keystone.common.kvs.DictKvs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></p>
+<dl class="method">
+<dt id="keystone.common.kvs.DictKvs.delete">
+<tt class="descname">delete</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#keystone.common.kvs.DictKvs.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.kvs.DictKvs.set">
+<tt class="descname">set</tt><big>(</big><em>key</em>, <em>value</em><big>)</big><a class="headerlink" href="#keystone.common.kvs.DictKvs.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.logging">
+<span id="logging-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">logging</span></tt> Module<a class="headerlink" href="#module-keystone.common.logging" title="Permalink to this headline">¶</a></h2>
+<p>Wrapper for built-in logging module.</p>
+<dl class="function">
+<dt id="keystone.common.logging.log_debug">
+<tt class="descclassname">keystone.common.logging.</tt><tt class="descname">log_debug</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#keystone.common.logging.log_debug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.manager">
+<span id="manager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">manager</span></tt> Module<a class="headerlink" href="#module-keystone.common.manager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="keystone.common.manager.Manager">
+<em class="property">class </em><tt class="descclassname">keystone.common.manager.</tt><tt class="descname">Manager</tt><big>(</big><em>driver_name</em><big>)</big><a class="headerlink" href="#keystone.common.manager.Manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base class for intermediary request layer.</p>
+<p>The Manager layer exists to support additional logic that applies to all
+or some of the methods exposed by a service that are not specific to the
+HTTP interface.</p>
+<p>It also provides a stable entry point to dynamic backends.</p>
+<p>An example of a probable use case is logging all the calls.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.utils">
+<span id="utils-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">utils</span></tt> Module<a class="headerlink" href="#module-keystone.common.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="keystone.common.utils.Ec2Signer">
+<em class="property">class </em><tt class="descclassname">keystone.common.utils.</tt><tt class="descname">Ec2Signer</tt><big>(</big><em>secret_key</em><big>)</big><a class="headerlink" href="#keystone.common.utils.Ec2Signer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Hacked up code from boto/connection.py</p>
+<dl class="method">
+<dt id="keystone.common.utils.Ec2Signer.generate">
+<tt class="descname">generate</tt><big>(</big><em>credentials</em><big>)</big><a class="headerlink" href="#keystone.common.utils.Ec2Signer.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate auth string according to what SignatureVersion is given.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.utils.SmarterEncoder">
+<em class="property">class </em><tt class="descclassname">keystone.common.utils.</tt><tt class="descname">SmarterEncoder</tt><big>(</big><em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>encoding='utf-8'</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#keystone.common.utils.SmarterEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">json.encoder.JSONEncoder</span></tt></p>
+<p>Help for JSON encoding dict-like objects.</p>
+<dl class="method">
+<dt id="keystone.common.utils.SmarterEncoder.default">
+<tt class="descname">default</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#keystone.common.utils.SmarterEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.utils.check_output">
+<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">check_output</tt><big>(</big><em>*popenargs</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#keystone.common.utils.check_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run command with arguments and return its output as a byte string.</p>
+<p>If the exit code was non-zero it raises a CalledProcessError.  The
+CalledProcessError object will have the return code in the returncode
+attribute and output in the output attribute.</p>
+<p>The arguments are the same as for the Popen constructor.  Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">check_output</span><span class="p">([</span><span class="s">&quot;ls&quot;</span><span class="p">,</span> <span class="s">&quot;-l&quot;</span><span class="p">,</span> <span class="s">&quot;/dev/null&quot;</span><span class="p">])</span>
+<span class="go">&#39;crw-rw-rw- 1 root root 1, 3 Oct 18  2007 /dev/null\n&#39;</span>
+</pre></div>
+</div>
+<p>The stdout argument is not allowed as it is used internally.
+To capture standard error in the result, use stderr=STDOUT.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">check_output</span><span class="p">([</span><span class="s">&quot;/bin/sh&quot;</span><span class="p">,</span> <span class="s">&quot;-c&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s">&quot;ls -l non_existent_file ; exit 0&quot;</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">)</span>
+<span class="go">&#39;ls: non_existent_file: No such file or directory\n&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.utils.git">
+<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">git</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#keystone.common.utils.git" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.utils.import_class">
+<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">import_class</tt><big>(</big><em>import_str</em><big>)</big><a class="headerlink" href="#keystone.common.utils.import_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a class from a string including module and class.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.common.utils.import_object">
+<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">import_object</tt><big>(</big><em>import_str</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.common.utils.import_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an object including a module or module and class.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-keystone.common.wsgi">
+<span id="wsgi-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">wsgi</span></tt> Module<a class="headerlink" href="#module-keystone.common.wsgi" title="Permalink to this headline">¶</a></h2>
+<p>Utility methods for working with WSGI servers.</p>
+<dl class="class">
+<dt id="keystone.common.wsgi.Application">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Application</tt><a class="headerlink" href="#keystone.common.wsgi.Application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.BaseApplication" title="keystone.common.wsgi.BaseApplication"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.BaseApplication</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.common.wsgi.Application.assert_admin">
+<tt class="descname">assert_admin</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Application.assert_admin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.BaseApplication">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">BaseApplication</tt><a class="headerlink" href="#keystone.common.wsgi.BaseApplication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base WSGI application wrapper. Subclasses need to implement __call__.</p>
+<dl class="classmethod">
+<dt id="keystone.common.wsgi.BaseApplication.factory">
+<em class="property">classmethod </em><tt class="descname">factory</tt><big>(</big><em>global_config</em>, <em>**local_config</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.BaseApplication.factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for paste app factories in paste.deploy config files.</p>
+<p>Any local configuration (that is, values under the [app:APPNAME]
+section of the paste config) will be passed into the <cite>__init__</cite> method
+as kwargs.</p>
+<p>A hypothetical configuration would look like:</p>
+<blockquote>
+<div>[app:wadl]
+latest_version = 1.3
+paste.app_factory = nova.api.fancy_api:Wadl.factory</div></blockquote>
+<p>which would result in a call to the <cite>Wadl</cite> class as</p>
+<blockquote>
+<div>import nova.api.fancy_api
+fancy_api.Wadl(latest_version=&#8216;1.3&#8217;)</div></blockquote>
+<p>You could of course re-implement the <cite>factory</cite> method in subclasses,
+but using the kwarg passing it shouldn&#8217;t be necessary.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.ComposableRouter">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">ComposableRouter</tt><big>(</big><em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ComposableRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Router" title="keystone.common.wsgi.Router"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Router</span></tt></a></p>
+<p>Router that supports use by ComposingRouter.</p>
+<dl class="method">
+<dt id="keystone.common.wsgi.ComposableRouter.add_routes">
+<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ComposableRouter.add_routes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add routes to given mapper.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.ComposingRouter">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">ComposingRouter</tt><big>(</big><em>mapper=None</em>, <em>routers=None</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ComposingRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Router" title="keystone.common.wsgi.Router"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Router</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.Debug">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Debug</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Middleware" title="keystone.common.wsgi.Middleware"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Middleware</span></tt></a></p>
+<p>Helper class for debugging a WSGI application.</p>
+<p>Can be inserted into any WSGI application chain to get information
+about the request and response.</p>
+<dl class="staticmethod">
+<dt id="keystone.common.wsgi.Debug.print_generator">
+<em class="property">static </em><tt class="descname">print_generator</tt><big>(</big><em>app_iter</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Debug.print_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator that prints the contents of a wrapper string.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.ExtensionRouter">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">ExtensionRouter</tt><big>(</big><em>application</em>, <em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ExtensionRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Router" title="keystone.common.wsgi.Router"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Router</span></tt></a></p>
+<p>A router that allows extensions to supplement or overwrite routes.</p>
+<p>Expects to be subclassed.</p>
+<dl class="method">
+<dt id="keystone.common.wsgi.ExtensionRouter.add_routes">
+<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ExtensionRouter.add_routes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="keystone.common.wsgi.ExtensionRouter.factory">
+<em class="property">classmethod </em><tt class="descname">factory</tt><big>(</big><em>global_config</em>, <em>**local_config</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ExtensionRouter.factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for paste app factories in paste.deploy config files.</p>
+<p>Any local configuration (that is, values under the [filter:APPNAME]
+section of the paste config) will be passed into the <cite>__init__</cite> method
+as kwargs.</p>
+<p>A hypothetical configuration would look like:</p>
+<blockquote>
+<div>[filter:analytics]
+redis_host = 127.0.0.1
+paste.filter_factory = nova.api.analytics:Analytics.factory</div></blockquote>
+<p>which would result in a call to the <cite>Analytics</cite> class as</p>
+<blockquote>
+<div>import nova.api.analytics
+analytics.Analytics(app_from_paste, redis_host=&#8216;127.0.0.1&#8217;)</div></blockquote>
+<p>You could of course re-implement the <cite>factory</cite> method in subclasses,
+but using the kwarg passing it shouldn&#8217;t be necessary.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.Middleware">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Middleware</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<p>Base WSGI middleware.</p>
+<p>These classes require an application to be
+initialized that will be called next.  By default the middleware will
+simply call its wrapped app, or you can override __call__ to customize its
+behavior.</p>
+<dl class="classmethod">
+<dt id="keystone.common.wsgi.Middleware.factory">
+<em class="property">classmethod </em><tt class="descname">factory</tt><big>(</big><em>global_config</em>, <em>**local_config</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware.factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for paste app factories in paste.deploy config files.</p>
+<p>Any local configuration (that is, values under the [filter:APPNAME]
+section of the paste config) will be passed into the <cite>__init__</cite> method
+as kwargs.</p>
+<p>A hypothetical configuration would look like:</p>
+<blockquote>
+<div>[filter:analytics]
+redis_host = 127.0.0.1
+paste.filter_factory = nova.api.analytics:Analytics.factory</div></blockquote>
+<p>which would result in a call to the <cite>Analytics</cite> class as</p>
+<blockquote>
+<div>import nova.api.analytics
+analytics.Analytics(app_from_paste, redis_host=&#8216;127.0.0.1&#8217;)</div></blockquote>
+<p>You could of course re-implement the <cite>factory</cite> method in subclasses,
+but using the kwarg passing it shouldn&#8217;t be necessary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.wsgi.Middleware.process_request">
+<tt class="descname">process_request</tt><big>(</big><em>req</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware.process_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called on each request.</p>
+<p>If this returns None, the next application down the stack will be
+executed. If it returns a response then that response will be returned
+and execution will stop here.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.wsgi.Middleware.process_response">
+<tt class="descname">process_response</tt><big>(</big><em>response</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware.process_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do whatever you&#8217;d like to the response.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.Request">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Request</tt><big>(</big><em>environ=None</em>, <em>environ_getter=None</em>, <em>charset=(No Default)</em>, <em>unicode_errors=(No Default)</em>, <em>decode_param_names=(No Default)</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">webob.request.Request</span></tt></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.Router">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Router</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Router" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>WSGI middleware that maps incoming requests to WSGI apps.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.Server">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Server</tt><big>(</big><em>application</em>, <em>port</em>, <em>threads=1000</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Server class to manage multiple WSGI sockets and applications.</p>
+<dl class="method">
+<dt id="keystone.common.wsgi.Server.start">
+<tt class="descname">start</tt><big>(</big><em>host='0.0.0.0'</em>, <em>key=None</em>, <em>backlog=128</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Server.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a WSGI server with the given application.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.common.wsgi.Server.wait">
+<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Server.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until all servers have completed running.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.common.wsgi.WritableLogger">
+<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">WritableLogger</tt><big>(</big><em>logger</em>, <em>level=10</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.WritableLogger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A thin wrapper that responds to <cite>write</cite> and logs.</p>
+<dl class="method">
+<dt id="keystone.common.wsgi.WritableLogger.write">
+<tt class="descname">write</tt><big>(</big><em>msg</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.WritableLogger.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="keystone.common.sql.html">sql Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.sql.html#id1"><tt class="docutils literal"><span class="pre">sql</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.sql.html#module-keystone.common.sql.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.sql.html#module-keystone.common.sql.migration"><tt class="docutils literal"><span class="pre">migration</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.sql.html#module-keystone.common.sql.util"><tt class="docutils literal"><span class="pre">util</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.sql.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.common.sql.migrate_repo.html">migrate_repo Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#module-keystone.common.sql.migrate_repo.manage"><tt class="docutils literal"><span class="pre">manage</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html">versions Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html#module-keystone.common.sql.migrate_repo.versions.001_add_initial_tables"><tt class="docutils literal"><span class="pre">001_add_initial_tables</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

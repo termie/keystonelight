@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Setting up a Keystone development environment &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <link rel="next" title="Getting Involved" href="community.html" />
+    <link rel="prev" title="Welcome to Keystone, the OpenStack Identity Service!" href="index.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="community.html" title="Getting Involved"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Keystone, the OpenStack Identity Service!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Setting up a Keystone development environment</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#getting-the-latest-code">Getting the latest code</a></li>
+<li><a class="reference internal" href="#installing-dependencies">Installing dependencies</a><ul>
+<li><a class="reference internal" href="#pypi-packages">PyPi Packages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#updating-your-pythonpath">Updating your PYTHONPATH</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#eventlet-segfaults-on-redhat-fedora">Eventlet segfaults on RedHat / Fedora</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Welcome to Keystone, the OpenStack Identity Service!</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="community.html"
+                                  title="next chapter">Getting Involved</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/setup.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="setting-up-a-keystone-development-environment">
+<h1>Setting up a Keystone development environment<a class="headerlink" href="#setting-up-a-keystone-development-environment" title="Permalink to this headline">¶</a></h1>
+<p>This document describes setting up keystone directly from <a class="reference external" href="http://github.com/openstack/keystone">GitHub</a>
+for development purposes.</p>
+<p>To install keystone from packaging, refer instead to Keystone&#8217;s <a class="reference external" href="http://docs.openstack.org/">User Documentation</a>.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This document assumes you are using:</p>
+<ul class="simple">
+<li>Ubuntu 11.10, Fedora 15, or Mac OS X Lion</li>
+<li><a class="reference external" href="http://www.python.org/">Python 2.7</a></li>
+</ul>
+<p>And that you have the following tools available on your system:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://git-scm.com/">git</a></li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a></li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a></li>
+</ul>
+<p><strong>Reminder</strong>: If you&#8217;re successfully using a different platform, or a
+different version of the above, please document your configuration here!</p>
+</div>
+<div class="section" id="getting-the-latest-code">
+<h2>Getting the latest code<a class="headerlink" href="#getting-the-latest-code" title="Permalink to this headline">¶</a></h2>
+<p>You can clone our latest code from our <cite>Github repository</cite>:</p>
+<div class="highlight-python"><pre>$ git clone https://github.com/openstack/keystone.git</pre>
+</div>
+<p>When that is complete, you can:</p>
+<div class="highlight-python"><pre>$ cd keystone</pre>
+</div>
+</div>
+<div class="section" id="installing-dependencies">
+<h2>Installing dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Keystone maintains a list of <a class="reference external" href="http://pypi.python.org/">PyPi</a> dependencies, designed for use by
+<a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a>.</p>
+<p>However, your system <em>may</em> need additional dependencies that <cite>pip</cite> (and by
+extension, PyPi) cannot satisfy. These dependencies should be installed
+prior to using <cite>pip</cite>, and the installation method may vary depending on
+your platform.</p>
+<p>Ubuntu 11.10:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install python-dev libxml2-dev libxslt1-dev libsasl2-dev libsqlite3-dev libssl-dev libldap2-dev</pre>
+</div>
+<p>Fedora 15:</p>
+<div class="highlight-python"><pre>$ sudo yum install python-sqlite2 python-lxml python-greenlet-devel python-ldap</pre>
+</div>
+<p>Mac OS X Lion (requires <a class="reference external" href="http://www.macports.org/">MacPorts</a>):</p>
+<div class="highlight-python"><pre>$ sudo port install py-ldap</pre>
+</div>
+<div class="section" id="pypi-packages">
+<h3>PyPi Packages<a class="headerlink" href="#pypi-packages" title="Permalink to this headline">¶</a></h3>
+<p>Assuming you have any necessary binary packages &amp; header files available
+on your system, you can then install PyPi dependencies.</p>
+<p>You may also need to prefix <cite>pip install</cite> with <cite>sudo</cite>, depending on your
+environment:</p>
+<div class="highlight-python"><pre># Describe dependencies (including non-PyPi dependencies)
+$ cat tools/pip-requires
+
+# Install all PyPi dependencies (for production, testing, and development)
+$ pip install -r tools/pip-requires</pre>
+</div>
+</div>
+</div>
+<div class="section" id="updating-your-pythonpath">
+<h2>Updating your PYTHONPATH<a class="headerlink" href="#updating-your-pythonpath" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of methods for getting Keystone into your PYTHON PATH,
+the easiest of which is:</p>
+<div class="highlight-python"><pre># Fake-install the project by symlinking Keystone into your Python site-packages
+$ python setup.py develop</pre>
+</div>
+<p>You should then be able to <cite>import keystone</cite> from your Python shell
+without issue:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">keystone.version</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>If you want to check the version of Keystone you are running:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">keystone</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">version</span><span class="p">()</span>
+<span class="go">2012.1-dev</span>
+</pre></div>
+</div>
+<p>If you can import keystone successfully, you should be ready to move on to <a class="reference internal" href="testing.html"><em>Testing Keystone</em></a>.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="eventlet-segfaults-on-redhat-fedora">
+<h3>Eventlet segfaults on RedHat / Fedora<a class="headerlink" href="#eventlet-segfaults-on-redhat-fedora" title="Permalink to this headline">¶</a></h3>
+<p>[<em>If this is no longer an issue, please remove this section, thanks!</em>]</p>
+<p>On some OSes, specifically Fedora 15, the current versions of
+greenlet/eventlet segfault when running keystone. To fix this, install
+the development versions of greenlet and eventlet:</p>
+<div class="highlight-python"><pre>$ pip uninstall greenlet eventlet
+$ cd &lt;appropriate working directory&gt;
+$ hg clone https://bitbucket.org/ambroff/greenlet
+$ cd greenlet
+$ sudo python setup.py install
+
+$ cd &lt;appropriate working directory&gt;
+$ hg clone https://bitbucket.org/which_linden/eventlet
+$ cd greenlet
+$ sudo python setup.py install</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="community.html" title="Getting Involved"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Keystone, the OpenStack Identity Service!"
+             >previous</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

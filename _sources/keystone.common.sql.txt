@@ -1,0 +1,42 @@
+sql Package
+===========
+
+:mod:`sql` Package
+------------------
+
+.. automodule:: keystone.common.sql
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`core` Module
+------------------
+
+.. automodule:: keystone.common.sql.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`migration` Module
+-----------------------
+
+.. automodule:: keystone.common.sql.migration
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`util` Module
+------------------
+
+.. automodule:: keystone.common.sql.util
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.common.sql.migrate_repo
+

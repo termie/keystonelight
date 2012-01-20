@@ -1,0 +1,19 @@
+admin_crud Package
+==================
+
+:mod:`admin_crud` Package
+-------------------------
+
+.. automodule:: keystone.contrib.admin_crud
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`core` Module
+------------------
+
+.. automodule:: keystone.contrib.admin_crud.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

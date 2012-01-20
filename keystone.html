@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>keystone Package &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">keystone Package</a><ul>
+<li><a class="reference internal" href="#module-keystone.config"><tt class="docutils literal"><span class="pre">config</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.service"><tt class="docutils literal"><span class="pre">service</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-keystone.test"><tt class="docutils literal"><span class="pre">test</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/keystone.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="keystone-package">
+<h1>keystone Package<a class="headerlink" href="#keystone-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-keystone.config">
+<span id="config-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">config</span></tt> Module<a class="headerlink" href="#module-keystone.config" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="keystone.config.CommonConfig">
+<em class="property">class </em><tt class="descclassname">keystone.config.</tt><tt class="descname">CommonConfig</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#keystone.config.CommonConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.config.ConfigMixin" title="keystone.config.ConfigMixin"><tt class="xref py py-class docutils literal"><span class="pre">keystone.config.ConfigMixin</span></tt></a>, <a class="reference internal" href="keystone.common.html#keystone.common.cfg.CommonConfigOpts" title="keystone.common.cfg.CommonConfigOpts"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.CommonConfigOpts</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.config.Config">
+<em class="property">class </em><tt class="descclassname">keystone.config.</tt><tt class="descname">Config</tt><big>(</big><em>project=None</em>, <em>prog=None</em>, <em>version=None</em>, <em>usage=None</em>, <em>default_config_files=None</em><big>)</big><a class="headerlink" href="#keystone.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#keystone.config.ConfigMixin" title="keystone.config.ConfigMixin"><tt class="xref py py-class docutils literal"><span class="pre">keystone.config.ConfigMixin</span></tt></a>, <a class="reference internal" href="keystone.common.html#keystone.common.cfg.ConfigOpts" title="keystone.common.cfg.ConfigOpts"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.cfg.ConfigOpts</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.config.ConfigMixin">
+<em class="property">class </em><tt class="descclassname">keystone.config.</tt><tt class="descname">ConfigMixin</tt><a class="headerlink" href="#keystone.config.ConfigMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="keystone.config.ConfigMixin.iteritems">
+<tt class="descname">iteritems</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.config.ConfigMixin.iteritems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.config.ConfigMixin.print_help">
+<tt class="descname">print_help</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.config.ConfigMixin.print_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.config.ConfigMixin.set_usage">
+<tt class="descname">set_usage</tt><big>(</big><em>usage</em><big>)</big><a class="headerlink" href="#keystone.config.ConfigMixin.set_usage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.config.register_bool">
+<tt class="descclassname">keystone.config.</tt><tt class="descname">register_bool</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.config.register_bool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.config.register_cli_bool">
+<tt class="descclassname">keystone.config.</tt><tt class="descname">register_cli_bool</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.config.register_cli_bool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.config.register_cli_str">
+<tt class="descclassname">keystone.config.</tt><tt class="descname">register_cli_str</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.config.register_cli_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.config.register_str">
+<tt class="descclassname">keystone.config.</tt><tt class="descname">register_str</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.config.register_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.config.setup_logging">
+<tt class="descclassname">keystone.config.</tt><tt class="descname">setup_logging</tt><big>(</big><em>conf</em><big>)</big><a class="headerlink" href="#keystone.config.setup_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up the logging options for a log with supplied name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>conf</strong> &#8211; a cfg.ConfOpts object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-keystone.service">
+<span id="service-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">service</span></tt> Module<a class="headerlink" href="#module-keystone.service" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="keystone.service.AdminRouter">
+<em class="property">class </em><tt class="descclassname">keystone.service.</tt><tt class="descname">AdminRouter</tt><a class="headerlink" href="#keystone.service.AdminRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.ComposingRouter" title="keystone.common.wsgi.ComposingRouter"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.ComposingRouter</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.service.ExtensionsController">
+<em class="property">class </em><tt class="descclassname">keystone.service.</tt><tt class="descname">ExtensionsController</tt><a class="headerlink" href="#keystone.service.ExtensionsController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.service.ExtensionsController.get_extensions_info">
+<tt class="descname">get_extensions_info</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#keystone.service.ExtensionsController.get_extensions_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.service.NoopController">
+<em class="property">class </em><tt class="descclassname">keystone.service.</tt><tt class="descname">NoopController</tt><a class="headerlink" href="#keystone.service.NoopController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.service.NoopController.noop">
+<tt class="descname">noop</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#keystone.service.NoopController.noop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.service.PublicRouter">
+<em class="property">class </em><tt class="descclassname">keystone.service.</tt><tt class="descname">PublicRouter</tt><a class="headerlink" href="#keystone.service.PublicRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.ComposingRouter" title="keystone.common.wsgi.ComposingRouter"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.ComposingRouter</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.service.TokenController">
+<em class="property">class </em><tt class="descclassname">keystone.service.</tt><tt class="descname">TokenController</tt><a class="headerlink" href="#keystone.service.TokenController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.service.TokenController.authenticate">
+<tt class="descname">authenticate</tt><big>(</big><em>context</em>, <em>auth=None</em><big>)</big><a class="headerlink" href="#keystone.service.TokenController.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authenticate credentials and return a token.</p>
+<p>Accept auth as a dict that looks like:</p>
+<dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;auth&#8221;:{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;passwordCredentials&#8221;:{</dt>
+<dd>&#8220;username&#8221;:&#8221;test_user&#8221;,
+&#8220;password&#8221;:&#8221;mypass&#8221;</dd>
+</dl>
+<p class="last">},
+&#8220;tenantName&#8221;:&#8221;customer-x&#8221;</p>
+</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+<p>In this case, tenant is optional, if not provided the token will be
+considered &#8220;unscoped&#8221; and can later be used to get a scoped token.</p>
+<p>Alternatively, this call accepts auth with only a token and tenant
+that will return a token that is scoped to that tenant.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.service.TokenController.endpoints">
+<tt class="descname">endpoints</tt><big>(</big><em>context</em>, <em>token_id</em><big>)</big><a class="headerlink" href="#keystone.service.TokenController.endpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return service catalog endpoints.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.service.TokenController.validate_token">
+<tt class="descname">validate_token</tt><big>(</big><em>context</em>, <em>token_id</em>, <em>belongs_to=None</em><big>)</big><a class="headerlink" href="#keystone.service.TokenController.validate_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that a token is valid.</p>
+<p>Optionally, also ensure that it is owned by a specific tenant.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.service.VersionController">
+<em class="property">class </em><tt class="descclassname">keystone.service.</tt><tt class="descname">VersionController</tt><a class="headerlink" href="#keystone.service.VersionController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.service.VersionController.get_version_info">
+<tt class="descname">get_version_info</tt><big>(</big><em>context</em>, <em>module='version'</em><big>)</big><a class="headerlink" href="#keystone.service.VersionController.get_version_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.service.admin_app_factory">
+<tt class="descclassname">keystone.service.</tt><tt class="descname">admin_app_factory</tt><big>(</big><em>global_conf</em>, <em>**local_conf</em><big>)</big><a class="headerlink" href="#keystone.service.admin_app_factory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.service.public_app_factory">
+<tt class="descclassname">keystone.service.</tt><tt class="descname">public_app_factory</tt><big>(</big><em>global_conf</em>, <em>**local_conf</em><big>)</big><a class="headerlink" href="#keystone.service.public_app_factory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-keystone.test">
+<span id="test-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">test</span></tt> Module<a class="headerlink" href="#module-keystone.test" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="keystone.test.TestCase">
+<em class="property">class </em><tt class="descclassname">keystone.test.</tt><tt class="descname">TestCase</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></tt></p>
+<dl class="method">
+<dt id="keystone.test.TestCase.add_path">
+<tt class="descname">add_path</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.add_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.appconfig">
+<tt class="descname">appconfig</tt><big>(</big><em>config</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.appconfig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.assertDeepEquals">
+<tt class="descname">assertDeepEquals</tt><big>(</big><em>expected</em>, <em>actual</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.assertDeepEquals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.assertDictEquals">
+<tt class="descname">assertDictEquals</tt><big>(</big><em>expected</em>, <em>actual</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.assertDictEquals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.assertListEquals">
+<tt class="descname">assertListEquals</tt><big>(</big><em>expected</em>, <em>actual</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.assertListEquals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.client">
+<tt class="descname">client</tt><big>(</big><em>app</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.load_backends">
+<tt class="descname">load_backends</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.test.TestCase.load_backends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hacky shortcut to load the backends for data manipulation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.load_fixtures">
+<tt class="descname">load_fixtures</tt><big>(</big><em>fixtures</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.load_fixtures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hacky basic and naive fixture loading based on a python module.</p>
+<p>Expects that the various APIs into the various services are already
+defined on <cite>self</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.loadapp">
+<tt class="descname">loadapp</tt><big>(</big><em>config</em>, <em>name='main'</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.loadapp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.serveapp">
+<tt class="descname">serveapp</tt><big>(</big><em>config</em>, <em>name=None</em><big>)</big><a class="headerlink" href="#keystone.test.TestCase.serveapp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.setUp">
+<tt class="descname">setUp</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.test.TestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestCase.tearDown">
+<tt class="descname">tearDown</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.test.TestCase.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.test.TestClient">
+<em class="property">class </em><tt class="descclassname">keystone.test.</tt><tt class="descname">TestClient</tt><big>(</big><em>app=None</em>, <em>token=None</em><big>)</big><a class="headerlink" href="#keystone.test.TestClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="keystone.test.TestClient.get">
+<tt class="descname">get</tt><big>(</big><em>path</em>, <em>headers=None</em><big>)</big><a class="headerlink" href="#keystone.test.TestClient.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestClient.post">
+<tt class="descname">post</tt><big>(</big><em>path</em>, <em>headers=None</em>, <em>body=None</em><big>)</big><a class="headerlink" href="#keystone.test.TestClient.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestClient.put">
+<tt class="descname">put</tt><big>(</big><em>path</em>, <em>headers=None</em>, <em>body=None</em><big>)</big><a class="headerlink" href="#keystone.test.TestClient.put" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.test.TestClient.request">
+<tt class="descname">request</tt><big>(</big><em>method</em>, <em>path</em>, <em>headers=None</em>, <em>body=None</em><big>)</big><a class="headerlink" href="#keystone.test.TestClient.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="keystone.test.checkout_vendor">
+<tt class="descclassname">keystone.test.</tt><tt class="descname">checkout_vendor</tt><big>(</big><em>repo</em>, <em>rev</em><big>)</big><a class="headerlink" href="#keystone.test.checkout_vendor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.test.etcdir">
+<tt class="descclassname">keystone.test.</tt><tt class="descname">etcdir</tt><big>(</big><em>*p</em><big>)</big><a class="headerlink" href="#keystone.test.etcdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.test.rootdir">
+<tt class="descclassname">keystone.test.</tt><tt class="descname">rootdir</tt><big>(</big><em>*p</em><big>)</big><a class="headerlink" href="#keystone.test.rootdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="keystone.test.testsdir">
+<tt class="descclassname">keystone.test.</tt><tt class="descname">testsdir</tt><big>(</big><em>*p</em><big>)</big><a class="headerlink" href="#keystone.test.testsdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="keystone.catalog.html">catalog Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.catalog.html#id1"><tt class="docutils literal"><span class="pre">catalog</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.catalog.html#module-keystone.catalog.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.catalog.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.catalog.backends.html">backends Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.catalog.backends.html#module-keystone.catalog.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.catalog.backends.html#module-keystone.catalog.backends.templated"><tt class="docutils literal"><span class="pre">templated</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keystone.common.html">common Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#module-keystone.common.bufferedhttp"><tt class="docutils literal"><span class="pre">bufferedhttp</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#module-keystone.common.cfg"><tt class="docutils literal"><span class="pre">cfg</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#module-keystone.common.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#module-keystone.common.logging"><tt class="docutils literal"><span class="pre">logging</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#module-keystone.common.manager"><tt class="docutils literal"><span class="pre">manager</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#module-keystone.common.utils"><tt class="docutils literal"><span class="pre">utils</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#module-keystone.common.wsgi"><tt class="docutils literal"><span class="pre">wsgi</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.common.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.common.sql.html">sql Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.html#id1"><tt class="docutils literal"><span class="pre">sql</span></tt> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.html#module-keystone.common.sql.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.html#module-keystone.common.sql.migration"><tt class="docutils literal"><span class="pre">migration</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.html#module-keystone.common.sql.util"><tt class="docutils literal"><span class="pre">util</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="keystone.common.sql.migrate_repo.html">migrate_repo Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#module-keystone.common.sql.migrate_repo.manage"><tt class="docutils literal"><span class="pre">manage</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html">versions Package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html#module-keystone.common.sql.migrate_repo.versions.001_add_initial_tables"><tt class="docutils literal"><span class="pre">001_add_initial_tables</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keystone.contrib.html">contrib Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.contrib.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.contrib.admin_crud.html">admin_crud Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.contrib.admin_crud.html#id1"><tt class="docutils literal"><span class="pre">admin_crud</span></tt> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.contrib.admin_crud.html#module-keystone.contrib.admin_crud.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="keystone.contrib.ec2.html">ec2 Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.contrib.ec2.html#id1"><tt class="docutils literal"><span class="pre">ec2</span></tt> Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.contrib.ec2.html#module-keystone.contrib.ec2.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.contrib.ec2.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="keystone.contrib.ec2.backends.html">backends Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="keystone.contrib.ec2.backends.html#module-keystone.contrib.ec2.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="keystone.contrib.ec2.backends.html#module-keystone.contrib.ec2.backends.sql"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keystone.identity.html">identity Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.identity.html#id1"><tt class="docutils literal"><span class="pre">identity</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.identity.html#module-keystone.identity.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.identity.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.identity.backends.html">backends Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.identity.backends.html#module-keystone.identity.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.identity.backends.html#module-keystone.identity.backends.pam"><tt class="docutils literal"><span class="pre">pam</span></tt> Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="keystone.identity.backends.html#module-keystone.identity.backends.sql"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keystone.middleware.html">middleware Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#id1"><tt class="docutils literal"><span class="pre">middleware</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#auth-token-module"><tt class="docutils literal"><span class="pre">auth_token</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#module-keystone.middleware.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#ec2-token-module"><tt class="docutils literal"><span class="pre">ec2_token</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#glance-auth-token-module"><tt class="docutils literal"><span class="pre">glance_auth_token</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#nova-auth-token-module"><tt class="docutils literal"><span class="pre">nova_auth_token</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#nova-keystone-context-module"><tt class="docutils literal"><span class="pre">nova_keystone_context</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.middleware.html#swift-auth-module"><tt class="docutils literal"><span class="pre">swift_auth</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keystone.policy.html">policy Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.policy.html#id1"><tt class="docutils literal"><span class="pre">policy</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.policy.html#module-keystone.policy.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.policy.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.policy.backends.html">backends Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.policy.backends.html#module-keystone.policy.backends.simple"><tt class="docutils literal"><span class="pre">simple</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keystone.token.html">token Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.token.html#id1"><tt class="docutils literal"><span class="pre">token</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.token.html#module-keystone.token.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.token.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="keystone.token.backends.html">backends Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="keystone.token.backends.html#module-keystone.token.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+backends Package
+================
+
+:mod:`kvs` Module
+-----------------
+
+.. automodule:: keystone.identity.backends.kvs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`pam` Module
+-----------------
+
+.. automodule:: keystone.identity.backends.pam
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`sql` Module
+-----------------
+
+.. automodule:: keystone.identity.backends.sql
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

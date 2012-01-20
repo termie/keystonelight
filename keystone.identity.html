@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>identity Package &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">identity Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">identity</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-keystone.identity.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/keystone.identity.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="identity-package">
+<h1>identity Package<a class="headerlink" href="#identity-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">identity</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-keystone.identity"></span></div>
+<div class="section" id="module-keystone.identity.core">
+<span id="core-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#module-keystone.identity.core" title="Permalink to this headline">¶</a></h2>
+<p>Main entry point into the Identity service.</p>
+<dl class="class">
+<dt id="keystone.identity.core.AdminRouter">
+<em class="property">class </em><tt class="descclassname">keystone.identity.core.</tt><tt class="descname">AdminRouter</tt><big>(</big><em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.identity.core.AdminRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.ComposableRouter" title="keystone.common.wsgi.ComposableRouter"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.ComposableRouter</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.identity.core.AdminRouter.add_routes">
+<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.identity.core.AdminRouter.add_routes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.identity.core.Driver">
+<em class="property">class </em><tt class="descclassname">keystone.identity.core.</tt><tt class="descname">Driver</tt><a class="headerlink" href="#keystone.identity.core.Driver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Interface description for an Identity driver.</p>
+<dl class="method">
+<dt id="keystone.identity.core.Driver.add_role_for_user_and_tenant">
+<tt class="descname">add_role_for_user_and_tenant</tt><big>(</big><em>user_id</em>, <em>tenant_id</em>, <em>role_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.add_role_for_user_and_tenant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a role to a user within given tenant.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.add_user_to_tenant">
+<tt class="descname">add_user_to_tenant</tt><big>(</big><em>tenant_id</em>, <em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.add_user_to_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.authenticate">
+<tt class="descname">authenticate</tt><big>(</big><em>user_id=None</em>, <em>tenant_id=None</em>, <em>password=None</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authenticate a given user, tenant and password.</p>
+<p>Returns: (user, tenant, metadata).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.create_metadata">
+<tt class="descname">create_metadata</tt><big>(</big><em>user_id</em>, <em>tenant_id</em>, <em>metadata</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.create_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.create_role">
+<tt class="descname">create_role</tt><big>(</big><em>role_id</em>, <em>role</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.create_role" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.create_tenant">
+<tt class="descname">create_tenant</tt><big>(</big><em>tenant_id</em>, <em>tenant</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.create_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.create_user">
+<tt class="descname">create_user</tt><big>(</big><em>user_id</em>, <em>user</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.create_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.delete_metadata">
+<tt class="descname">delete_metadata</tt><big>(</big><em>user_id</em>, <em>tenant_id</em>, <em>metadata</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.delete_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.delete_role">
+<tt class="descname">delete_role</tt><big>(</big><em>role_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.delete_role" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.delete_tenant">
+<tt class="descname">delete_tenant</tt><big>(</big><em>tenant_id</em>, <em>tenant</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.delete_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.delete_user">
+<tt class="descname">delete_user</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.delete_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.get_role">
+<tt class="descname">get_role</tt><big>(</big><em>role_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.get_role" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a role by id.</p>
+<p>Returns: role_ref or None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.get_roles_for_user_and_tenant">
+<tt class="descname">get_roles_for_user_and_tenant</tt><big>(</big><em>user_id</em>, <em>tenant_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.get_roles_for_user_and_tenant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the roles associated with a user within given tenant.</p>
+<p>Returns: a list of role ids.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.get_tenant">
+<tt class="descname">get_tenant</tt><big>(</big><em>tenant_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.get_tenant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a tenant by id.</p>
+<p>Returns: tenant_ref or None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.get_tenant_by_name">
+<tt class="descname">get_tenant_by_name</tt><big>(</big><em>tenant_name</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.get_tenant_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a tenant by name.</p>
+<p>Returns: tenant_ref or None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.get_tenants_for_user">
+<tt class="descname">get_tenants_for_user</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.get_tenants_for_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the tenants associated with a given user.</p>
+<p>Returns: a list of tenant ids.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.get_user">
+<tt class="descname">get_user</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.get_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a user by id.</p>
+<p>Returns: user_ref or None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.get_user_by_name">
+<tt class="descname">get_user_by_name</tt><big>(</big><em>user_name</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.get_user_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a user by name.</p>
+<p>Returns: user_ref or None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.list_roles">
+<tt class="descname">list_roles</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.list_roles" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all roles in the system.</p>
+<p>Returns: a list of role_refs or an empty list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.list_users">
+<tt class="descname">list_users</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.list_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all users in the system.</p>
+<dl class="docutils">
+<dt>NOTE(termie): I&#8217;d prefer if this listed only the users for a given</dt>
+<dd>tenant.</dd>
+</dl>
+<p>Returns: a list of user_refs or an empty list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.remove_role_from_user_and_tenant">
+<tt class="descname">remove_role_from_user_and_tenant</tt><big>(</big><em>user_id</em>, <em>tenant_id</em>, <em>role_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.remove_role_from_user_and_tenant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a role from a user within given tenant.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.remove_user_from_tenant">
+<tt class="descname">remove_user_from_tenant</tt><big>(</big><em>tenant_id</em>, <em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.remove_user_from_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.update_metadata">
+<tt class="descname">update_metadata</tt><big>(</big><em>user_id</em>, <em>tenant_id</em>, <em>metadata</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.update_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.update_role">
+<tt class="descname">update_role</tt><big>(</big><em>role_id</em>, <em>role</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.update_role" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.update_tenant">
+<tt class="descname">update_tenant</tt><big>(</big><em>tenant_id</em>, <em>tenant</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.update_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.Driver.update_user">
+<tt class="descname">update_user</tt><big>(</big><em>user_id</em>, <em>user</em><big>)</big><a class="headerlink" href="#keystone.identity.core.Driver.update_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.identity.core.Manager">
+<em class="property">class </em><tt class="descclassname">keystone.identity.core.</tt><tt class="descname">Manager</tt><a class="headerlink" href="#keystone.identity.core.Manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.manager.Manager" title="keystone.common.manager.Manager"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.manager.Manager</span></tt></a></p>
+<p>Default pivot point for the Identity backend.</p>
+<p>See <tt class="xref py py-mod docutils literal"><span class="pre">keystone.manager.Manager</span></tt> for more details on how this
+dynamically calls the backend.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.identity.core.PublicRouter">
+<em class="property">class </em><tt class="descclassname">keystone.identity.core.</tt><tt class="descname">PublicRouter</tt><big>(</big><em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.identity.core.PublicRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.ComposableRouter" title="keystone.common.wsgi.ComposableRouter"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.ComposableRouter</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.identity.core.PublicRouter.add_routes">
+<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.identity.core.PublicRouter.add_routes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.identity.core.RoleController">
+<em class="property">class </em><tt class="descclassname">keystone.identity.core.</tt><tt class="descname">RoleController</tt><a class="headerlink" href="#keystone.identity.core.RoleController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.create_role">
+<tt class="descname">create_role</tt><big>(</big><em>context</em>, <em>role</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.create_role" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.create_role_ref">
+<tt class="descname">create_role_ref</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>role</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.create_role_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is actually used for adding a user to a tenant.</p>
+<p>In the legacy data model adding a user to a tenant required setting
+a role.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.delete_role">
+<tt class="descname">delete_role</tt><big>(</big><em>context</em>, <em>role_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.delete_role" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.delete_role_ref">
+<tt class="descname">delete_role_ref</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>role_ref_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.delete_role_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is actually used for deleting a user from a tenant.</p>
+<p>In the legacy data model removing a user from a tenant required
+deleting a role.</p>
+<p>To emulate this, we encode the tenant and role in the role_ref_id,
+and if this happens to be the last role for the user-tenant pair,
+we remove the user from the tenant.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.get_role">
+<tt class="descname">get_role</tt><big>(</big><em>context</em>, <em>role_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.get_role" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.get_role_refs">
+<tt class="descname">get_role_refs</tt><big>(</big><em>context</em>, <em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.get_role_refs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ultimate hack to get around having to make role_refs first-class.</p>
+<p>This will basically iterate over the various roles the user has in
+all tenants the user is a member of and create fake role_refs where
+the id encodes the user-tenant-role information so we can look
+up the appropriate data when we need to delete them.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.get_roles">
+<tt class="descname">get_roles</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.get_roles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.RoleController.get_user_roles">
+<tt class="descname">get_user_roles</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>tenant_id=None</em><big>)</big><a class="headerlink" href="#keystone.identity.core.RoleController.get_user_roles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.identity.core.TenantController">
+<em class="property">class </em><tt class="descclassname">keystone.identity.core.</tt><tt class="descname">TenantController</tt><a class="headerlink" href="#keystone.identity.core.TenantController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.identity.core.TenantController.create_tenant">
+<tt class="descname">create_tenant</tt><big>(</big><em>context</em>, <em>tenant</em><big>)</big><a class="headerlink" href="#keystone.identity.core.TenantController.create_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.TenantController.delete_tenant">
+<tt class="descname">delete_tenant</tt><big>(</big><em>context</em>, <em>tenant_id</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.identity.core.TenantController.delete_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.TenantController.get_tenant">
+<tt class="descname">get_tenant</tt><big>(</big><em>context</em>, <em>tenant_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.TenantController.get_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.TenantController.get_tenant_users">
+<tt class="descname">get_tenant_users</tt><big>(</big><em>context</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.identity.core.TenantController.get_tenant_users" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.TenantController.get_tenants_for_token">
+<tt class="descname">get_tenants_for_token</tt><big>(</big><em>context</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.identity.core.TenantController.get_tenants_for_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get valid tenants for token based on token used to authenticate.</p>
+<p>Pulls the token from the context, validates it and gets the valid
+tenants for the user in the token.</p>
+<p>Doesn&#8217;t care about token scopedness.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.TenantController.update_tenant">
+<tt class="descname">update_tenant</tt><big>(</big><em>context</em>, <em>tenant_id</em>, <em>tenant</em><big>)</big><a class="headerlink" href="#keystone.identity.core.TenantController.update_tenant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.identity.core.UserController">
+<em class="property">class </em><tt class="descclassname">keystone.identity.core.</tt><tt class="descname">UserController</tt><a class="headerlink" href="#keystone.identity.core.UserController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.identity.core.UserController.create_user">
+<tt class="descname">create_user</tt><big>(</big><em>context</em>, <em>user</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.create_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.UserController.delete_user">
+<tt class="descname">delete_user</tt><big>(</big><em>context</em>, <em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.delete_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.UserController.get_user">
+<tt class="descname">get_user</tt><big>(</big><em>context</em>, <em>user_id</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.get_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.UserController.get_users">
+<tt class="descname">get_users</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.get_users" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.UserController.set_user_enabled">
+<tt class="descname">set_user_enabled</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>user</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.set_user_enabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.UserController.set_user_password">
+<tt class="descname">set_user_password</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>user</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.set_user_password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.UserController.update_user">
+<tt class="descname">update_user</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>user</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.update_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.identity.core.UserController.update_user_tenant">
+<tt class="descname">update_user_tenant</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>user</em><big>)</big><a class="headerlink" href="#keystone.identity.core.UserController.update_user_tenant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the default tenant.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="keystone.identity.backends.html">backends Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.identity.backends.html#module-keystone.identity.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.identity.backends.html#module-keystone.identity.backends.pam"><tt class="docutils literal"><span class="pre">pam</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.identity.backends.html#module-keystone.identity.backends.sql"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

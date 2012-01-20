@@ -1,0 +1,66 @@
+common Package
+==============
+
+:mod:`bufferedhttp` Module
+--------------------------
+
+.. automodule:: keystone.common.bufferedhttp
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`cfg` Module
+-----------------
+
+.. automodule:: keystone.common.cfg
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`kvs` Module
+-----------------
+
+.. automodule:: keystone.common.kvs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`logging` Module
+---------------------
+
+.. automodule:: keystone.common.logging
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`manager` Module
+---------------------
+
+.. automodule:: keystone.common.manager
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`utils` Module
+-------------------
+
+.. automodule:: keystone.common.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`wsgi` Module
+------------------
+
+.. automodule:: keystone.common.wsgi
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.common.sql
+

@@ -1,0 +1,40 @@
+keystone Package
+================
+
+:mod:`config` Module
+--------------------
+
+.. automodule:: keystone.config
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`service` Module
+---------------------
+
+.. automodule:: keystone.service
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`test` Module
+------------------
+
+.. automodule:: keystone.test
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.catalog
+    keystone.common
+    keystone.contrib
+    keystone.identity
+    keystone.middleware
+    keystone.policy
+    keystone.token
+

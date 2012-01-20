@@ -1,0 +1,26 @@
+ec2 Package
+===========
+
+:mod:`ec2` Package
+------------------
+
+.. automodule:: keystone.contrib.ec2
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`core` Module
+------------------
+
+.. automodule:: keystone.contrib.ec2.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.contrib.ec2.backends
+

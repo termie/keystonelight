@@ -1,0 +1,26 @@
+catalog Package
+===============
+
+:mod:`catalog` Package
+----------------------
+
+.. automodule:: keystone.catalog
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`core` Module
+------------------
+
+.. automodule:: keystone.catalog.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.catalog.backends
+

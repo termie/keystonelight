@@ -1,0 +1,67 @@
+middleware Package
+==================
+
+:mod:`middleware` Package
+-------------------------
+
+.. automodule:: keystone.middleware
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`auth_token` Module
+------------------------
+
+.. automodule:: keystone.middleware.auth_token
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`core` Module
+------------------
+
+.. automodule:: keystone.middleware.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`ec2_token` Module
+-----------------------
+
+.. automodule:: keystone.middleware.ec2_token
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`glance_auth_token` Module
+-------------------------------
+
+.. automodule:: keystone.middleware.glance_auth_token
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`nova_auth_token` Module
+-----------------------------
+
+.. automodule:: keystone.middleware.nova_auth_token
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`nova_keystone_context` Module
+-----------------------------------
+
+.. automodule:: keystone.middleware.nova_keystone_context
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`swift_auth` Module
+------------------------
+
+.. automodule:: keystone.middleware.swift_auth
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

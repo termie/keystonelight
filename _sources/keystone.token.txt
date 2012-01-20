@@ -1,0 +1,26 @@
+token Package
+=============
+
+:mod:`token` Package
+--------------------
+
+.. automodule:: keystone.token
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`core` Module
+------------------
+
+.. automodule:: keystone.token.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.token.backends
+

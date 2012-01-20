@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Developing with Keystone &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <link rel="prev" title="Testing Keystone" href="testing.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Keystone"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Developing with Keystone</a><ul>
+<li><a class="reference internal" href="#running-a-development-instance">Running a development instance</a><ul>
+<li><a class="reference internal" href="#setting-up-a-virtualenv">Setting up a virtualenv</a></li>
+<li><a class="reference internal" href="#running-keystone">Running Keystone</a></li>
+<li><a class="reference internal" href="#running-a-demo-service-that-uses-keystone">Running a demo service that uses Keystone</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interacting-with-keystone">Interacting with Keystone</a><ul>
+<li><a class="reference internal" href="#enabling-debugging-middleware">Enabling debugging middleware</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="testing.html"
+                                  title="previous chapter">Testing Keystone</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/developing.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="developing-with-keystone">
+<h1>Developing with Keystone<a class="headerlink" href="#developing-with-keystone" title="Permalink to this headline">¶</a></h1>
+<p>Get your development environment set up according to <a class="reference internal" href="setup.html"><em>Setting up a Keystone development environment</em></a>.</p>
+<div class="section" id="running-a-development-instance">
+<h2>Running a development instance<a class="headerlink" href="#running-a-development-instance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setting-up-a-virtualenv">
+<h3>Setting up a virtualenv<a class="headerlink" href="#setting-up-a-virtualenv" title="Permalink to this headline">¶</a></h3>
+<p>We recommend establishing a virtualenv to run keystone within. To establish
+this environment, use the command:</p>
+<div class="highlight-python"><pre>$ python tools/install_venv.py</pre>
+</div>
+<p>This will create a local virtual environment in the directory <tt class="docutils literal"><span class="pre">.venv</span></tt>.
+Once created, you can activate this virtualenv for your current shell using:</p>
+<div class="highlight-python"><pre>$ source .venv/bin/activate</pre>
+</div>
+<p>The virtual environment can be disabled using the command:</p>
+<div class="highlight-python"><pre>$ deactivate</pre>
+</div>
+<p>You can also use <tt class="docutils literal"><span class="pre">tools\with_venv.sh</span></tt> to prefix commands so that they run
+within the virtual environment. For more information on virtual environments,
+see <a class="reference external" href="http://www.virtualenv.org/">virtualenv</a>.</p>
+</div>
+<div class="section" id="running-keystone">
+<h3>Running Keystone<a class="headerlink" href="#running-keystone" title="Permalink to this headline">¶</a></h3>
+<p>To run the keystone Admin and API server instances, use:</p>
+<div class="highlight-python"><pre>$ tools/with_venv.sh bin/keystone</pre>
+</div>
+</div>
+<div class="section" id="running-a-demo-service-that-uses-keystone">
+<h3>Running a demo service that uses Keystone<a class="headerlink" href="#running-a-demo-service-that-uses-keystone" title="Permalink to this headline">¶</a></h3>
+<p>To run client demo (with all auth middleware running locally on sample service):</p>
+<div class="highlight-python"><pre>$ tools/with_venv.sh examples/echo/bin/echod</pre>
+</div>
+<p>which spins up a simple &#8220;echo&#8221; service on port 8090. To use a simple echo client:</p>
+<div class="highlight-python"><pre>$ python examples/echo/echo_client.py</pre>
+</div>
+</div>
+</div>
+<div class="section" id="interacting-with-keystone">
+<h2>Interacting with Keystone<a class="headerlink" href="#interacting-with-keystone" title="Permalink to this headline">¶</a></h2>
+<p>You can interact with Keystone through the command line using <a class="reference internal" href="man/keystone-manage.html"><em>keystone-manage</em></a>
+which allows you to establish tenants, users, etc.</p>
+<p>You can also interact with Keystone through it&#8217;s REST API. There is a python
+keystone client library <a class="reference external" href="https://github.com/4P/python-keystoneclient">python-keystoneclient</a> which interacts exclusively through
+the REST API.</p>
+<p>The easiest way to establish some base information in Keystone to interact with is
+to invoke:</p>
+<div class="highlight-python"><pre>$ tools/with_venv.sh bin/sampledata</pre>
+</div>
+<p>You can see the details of what that creates in <tt class="docutils literal"><span class="pre">keystone/test/sampledata.py</span></tt></p>
+<div class="section" id="enabling-debugging-middleware">
+<h3>Enabling debugging middleware<a class="headerlink" href="#enabling-debugging-middleware" title="Permalink to this headline">¶</a></h3>
+<p>You can enable a huge amount of additional data (debugging information) about
+the request and repsonse objects flowing through Keystone using the debugging
+WSGI middleware.</p>
+<p>To enable this, just modify the pipelines in <tt class="docutils literal"><span class="pre">etc/keystone.conf</span></tt>, from:</p>
+<div class="highlight-python"><pre>[pipeline:admin]
+pipeline =
+    urlnormalizer
+    admin_api
+
+[pipeline:keystone-legacy-auth]
+pipeline =
+    urlnormalizer
+    legacy_auth
+    d5_compat
+    service_api</pre>
+</div>
+<p>... to:</p>
+<div class="highlight-python"><pre>[pipeline:admin]
+pipeline =
+    debug
+    urlnormalizer
+    d5_compat
+    admin_api
+
+[pipeline:keystone-legacy-auth]
+pipeline =
+    debug
+    urlnormalizer
+    legacy_auth
+    d5_compat
+    service_api</pre>
+</div>
+<p>Two simple and easy debugging tools are using the <tt class="docutils literal"><span class="pre">-d</span></tt> when you start keystone:</p>
+<div class="highlight-python"><pre>$ ./keystone -d</pre>
+</div>
+<p>and the <cite>&#8211;trace-calls</cite> flag:</p>
+<div class="highlight-python"><pre>$ ./keystone -trace-calls</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">-d</span></tt> flag outputs debug information to the console. The <tt class="docutils literal"><span class="pre">--trace-calls</span></tt> flag
+outputs extensive, nested trace calls to the console and highlights any errors
+in red.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing Keystone"
+             >previous</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

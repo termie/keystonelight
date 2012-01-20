@@ -1,0 +1,11 @@
+backends Package
+================
+
+:mod:`kvs` Module
+-----------------
+
+.. automodule:: keystone.token.backends.kvs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

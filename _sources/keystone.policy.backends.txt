@@ -1,0 +1,11 @@
+backends Package
+================
+
+:mod:`simple` Module
+--------------------
+
+.. automodule:: keystone.policy.backends.simple
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

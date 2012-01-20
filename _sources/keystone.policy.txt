@@ -1,0 +1,26 @@
+policy Package
+==============
+
+:mod:`policy` Package
+---------------------
+
+.. automodule:: keystone.policy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`core` Module
+------------------
+
+.. automodule:: keystone.policy.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.policy.backends
+

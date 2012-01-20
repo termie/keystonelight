@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ec2 Package &mdash; keystone 2012.1-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2012.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.tweet.js"></script>
+    <link rel="top" title="keystone 2012.1-dev documentation" href="index.html" />
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $("#twitter_feed").tweet({
+                username: "openstack",
+                query: "from:openstack",
+                avatar_size: 32,
+                count: 10,
+                loading_text: "loading tweets..."
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">ec2 Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">ec2</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-keystone.contrib.ec2.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/keystone.contrib.ec2.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ec2-package">
+<h1>ec2 Package<a class="headerlink" href="#ec2-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">ec2</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-keystone.contrib.ec2"></span></div>
+<div class="section" id="module-keystone.contrib.ec2.core">
+<span id="core-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#module-keystone.contrib.ec2.core" title="Permalink to this headline">¶</a></h2>
+<p>Main entry point into the EC2 Credentials service.</p>
+<dl class="class">
+<dt id="keystone.contrib.ec2.core.Ec2Controller">
+<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.core.</tt><tt class="descname">Ec2Controller</tt><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.contrib.ec2.core.Ec2Controller.authenticate_ec2">
+<tt class="descname">authenticate_ec2</tt><big>(</big><em>context</em>, <em>credentials=None</em>, <em>ec2Credentials=None</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.authenticate_ec2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate a signed EC2 request and provide a token.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="keystone.contrib.ec2.core.Ec2Controller.create_credential">
+<tt class="descname">create_credential</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>tenant_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.create_credential" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.contrib.ec2.core.Ec2Controller.delete_credential">
+<tt class="descname">delete_credential</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.delete_credential" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.contrib.ec2.core.Ec2Controller.get_credential">
+<tt class="descname">get_credential</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.get_credential" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="keystone.contrib.ec2.core.Ec2Controller.get_credentials">
+<tt class="descname">get_credentials</tt><big>(</big><em>context</em>, <em>user_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.get_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>List credentials for the given user_id.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.contrib.ec2.core.Ec2Extension">
+<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.core.</tt><tt class="descname">Ec2Extension</tt><big>(</big><em>application</em>, <em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.ExtensionRouter" title="keystone.common.wsgi.ExtensionRouter"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.ExtensionRouter</span></tt></a></p>
+<dl class="method">
+<dt id="keystone.contrib.ec2.core.Ec2Extension.add_routes">
+<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Extension.add_routes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="keystone.contrib.ec2.core.Manager">
+<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.core.</tt><tt class="descname">Manager</tt><a class="headerlink" href="#keystone.contrib.ec2.core.Manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.manager.Manager" title="keystone.common.manager.Manager"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.manager.Manager</span></tt></a></p>
+<p>Default pivot point for the EC2 Credentials backend.</p>
+<p>See <tt class="xref py py-mod docutils literal"><span class="pre">keystone.manager.Manager</span></tt> for more details on how this
+dynamically calls the backend.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="keystone.contrib.ec2.backends.html">backends Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="keystone.contrib.ec2.backends.html#module-keystone.contrib.ec2.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.contrib.ec2.backends.html#module-keystone.contrib.ec2.backends.sql"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">keystone 2012.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, termie.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

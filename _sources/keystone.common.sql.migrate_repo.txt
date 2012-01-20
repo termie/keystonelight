@@ -1,0 +1,18 @@
+migrate_repo Package
+====================
+
+:mod:`manage` Module
+--------------------
+
+.. automodule:: keystone.common.sql.migrate_repo.manage
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    keystone.common.sql.migrate_repo.versions
+
