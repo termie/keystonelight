@@ -29,6 +29,7 @@ class User(sql.ModelBase, sql.DictBase):
         extra_copy = self.extra.copy()
         extra_copy['id'] = self.id
         extra_copy['name'] = self.name
+        extra_copy.pop('password', None)
         return extra_copy
 
 

@@ -135,9 +135,13 @@ class TestCase(unittest.TestCase):
             setattr(self, 'tenant_%s' % tenant['id'], rv)
 
         for user in fixtures.USERS:
+            # NOTE(termie): we're using copies here because these objects
+            #               get messed with a lot
             user_copy = user.copy()
             tenants = user_copy.pop('tenants')
-            rv = self.identity_api.create_user(user['id'], user_copy)
+            rv = self.identity_api.create_user(user['id'], user_copy.copy())
+            # NOTE(termie): provide the raw password for use in tests
+            rv['password'] = user_copy['password']
             for tenant_id in tenants:
                 self.identity_api.add_user_to_tenant(tenant_id, user['id'])
             setattr(self, 'user_%s' % user['id'], rv)
@@ -192,17 +196,17 @@ class TestCase(unittest.TestCase):
         sys.path.insert(0, path)
         self._paths.append(path)
 
-    def assertListEquals(self, expected, actual):
+    def assertListEquals(self, actual, expected):
         copy = expected[:]
         #print expected, actual
-        self.assertEquals(len(expected), len(actual))
+        self.assertEquals(len(actual), len(expected))
         while copy:
             item = copy.pop()
             matched = False
             for x in actual:
                 #print 'COMPARE', item, x,
                 try:
-                    self.assertDeepEquals(item, x)
+                    self.assertDeepEquals(x, item)
                     matched = True
                     #print 'MATCHED'
                     break
@@ -213,25 +217,25 @@ class TestCase(unittest.TestCase):
                 raise AssertionError('Expected: %s\n Got: %s' % (expected,
                                                                  actual))
 
-    def assertDictEquals(self, expected, actual):
+    def assertDictEquals(self, actual, expected):
         for k in expected:
             self.assertTrue(k in actual,
                             "Expected key %s not in %s." % (k, actual))
-            self.assertDeepEquals(expected[k], actual[k])
+            self.assertDeepEquals(actual[k], expected[k])
 
         for k in actual:
             self.assertTrue(k in expected,
                             "Unexpected key %s in %s." % (k, actual))
 
-    def assertDeepEquals(self, expected, actual):
+    def assertDeepEquals(self, actual, expected):
         try:
             if type(expected) is type([]) or type(expected) is type(tuple()):
                 # assert items equal, ignore order
-                self.assertListEquals(expected, actual)
+                self.assertListEquals(actual, expected)
             elif type(expected) is type({}):
-                self.assertDictEquals(expected, actual)
+                self.assertDictEquals(actual, expected)
             else:
-                self.assertEquals(expected, actual)
+                self.assertEquals(actual, expected)
         except AssertionError as e:
             raise
             raise AssertionError('Expected: %s\n Got: %s' % (expected, actual))
