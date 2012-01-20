@@ -2,6 +2,7 @@
 
 from keystone import identity
 from keystone.common import sql
+from keystone.common import utils
 from keystone.common.sql import migration
 
 
@@ -97,10 +98,17 @@ class Identity(sql.Base, identity.Driver):
         in the list of tenants on the user.
 
         """
-        user_ref = self.get_user(user_id)
+
+        session = self.get_session()
+        # NOTE(termie): this is a sql object, not a dict as usual for *_ref
+        user_ref = session.query(User).filter_by(id=user_id).first()
+        if not user_ref:
+            return
+
         tenant_ref = None
         metadata_ref = None
-        if not user_ref or user_ref.get('password') != password:
+        password = utils.hash_password(user_id, password)
+        if not user_ref or user_ref.extra.get('password') != password:
             raise AssertionError('Invalid user / password')
 
         tenants = self.get_tenants_for_user(user_id)

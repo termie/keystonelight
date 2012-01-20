@@ -239,6 +239,7 @@ class KcMasterTestCase(CompatTestCase):
         users = client.users.list()
         self.assertTrue(len(users) > 0)
         user = users[0]
+        print user
         with self.assertRaises(AttributeError):
             user.password
 

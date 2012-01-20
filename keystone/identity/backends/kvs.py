@@ -2,6 +2,7 @@
 
 from keystone import identity
 from keystone.common import kvs
+from keystone.common import utils
 
 
 class Identity(kvs.Base, identity.Driver):
@@ -13,9 +14,10 @@ class Identity(kvs.Base, identity.Driver):
         in the list of tenants on the user.
 
         """
-        user_ref = self.get_user(user_id)
+        user_ref = self.db.get('user-%s' % user_id)
         tenant_ref = None
         metadata_ref = None
+        password = utils.hash_password(user_id, password)
         if not user_ref or user_ref.get('password') != password:
             raise AssertionError('Invalid user / password')
         if tenant_id and tenant_id not in user_ref['tenants']:
@@ -38,11 +40,14 @@ class Identity(kvs.Base, identity.Driver):
 
     def get_user(self, user_id):
         user_ref = self.db.get('user-%s' % user_id)
-        return user_ref
+        return self._filter_user(user_ref)
 
     def get_user_by_name(self, user_name):
         user_ref = self.db.get('user_name-%s' % user_name)
-        return user_ref
+        return self._filter_user(user_ref)
+
+    def _filter_user(self, user_ref):
+        return user_ref.pop('password', '')
 
     def get_metadata(self, user_id, tenant_id):
         return self.db.get('metadata-%s-%s' % (tenant_id, user_id))

@@ -49,6 +49,10 @@ def import_object(import_str, *args, **kw):
         return cls(*args, **kw)
 
 
+def hash_password(user_id, password):
+    return password
+
+
 class SmarterEncoder(json.JSONEncoder):
     """Help for JSON encoding dict-like objects."""
     def default(self, obj):
