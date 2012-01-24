@@ -61,7 +61,7 @@
 <li><a class="reference internal" href="#">middleware Package</a><ul>
 <li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">middleware</span></tt> Package</a></li>
 <li><a class="reference internal" href="#auth-token-module"><tt class="docutils literal"><span class="pre">auth_token</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-keystone.middleware.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li><a class="reference internal" href="#core-module"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
 <li><a class="reference internal" href="#ec2-token-module"><tt class="docutils literal"><span class="pre">ec2_token</span></tt> Module</a></li>
 <li><a class="reference internal" href="#glance-auth-token-module"><tt class="docutils literal"><span class="pre">glance_auth_token</span></tt> Module</a></li>
 <li><a class="reference internal" href="#nova-auth-token-module"><tt class="docutils literal"><span class="pre">nova_auth_token</span></tt> Module</a></li>
@@ -101,70 +101,12 @@
 <h1>middleware Package<a class="headerlink" href="#middleware-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">middleware</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-keystone.middleware"></span></div>
+</div>
 <div class="section" id="auth-token-module">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">auth_token</span></tt> Module<a class="headerlink" href="#auth-token-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-keystone.middleware.core">
-<span id="core-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#module-keystone.middleware.core" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="keystone.middleware.core.AdminTokenAuthMiddleware">
-<em class="property">class </em><tt class="descclassname">keystone.middleware.core.</tt><tt class="descname">AdminTokenAuthMiddleware</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.AdminTokenAuthMiddleware" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Middleware" title="keystone.common.wsgi.Middleware"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Middleware</span></tt></a></p>
-<p>A trivial filter that checks for a pre-defined admin token.</p>
-<p>Sets &#8216;is_admin&#8217; to true in the context, expected to be checked by
-methods that are admin-only.</p>
-<dl class="method">
-<dt id="keystone.middleware.core.AdminTokenAuthMiddleware.process_request">
-<tt class="descname">process_request</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.AdminTokenAuthMiddleware.process_request" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.middleware.core.JsonBodyMiddleware">
-<em class="property">class </em><tt class="descclassname">keystone.middleware.core.</tt><tt class="descname">JsonBodyMiddleware</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.JsonBodyMiddleware" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Middleware" title="keystone.common.wsgi.Middleware"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Middleware</span></tt></a></p>
-<p>Middleware to allow method arguments to be passed as serialized JSON.</p>
-<p>Accepting arguments as JSON is useful for accepting data that may be more
-complex than simple primitives.</p>
-<p>In this case we accept it as urlencoded data under the key &#8216;json&#8217; as in
-json=&lt;urlencoded_json&gt; but this could be extended to accept raw JSON
-in the POST body.</p>
-<p>Filters out the parameters <cite>self</cite>, <cite>context</cite> and anything beginning with
-an underscore.</p>
-<dl class="method">
-<dt id="keystone.middleware.core.JsonBodyMiddleware.process_request">
-<tt class="descname">process_request</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.JsonBodyMiddleware.process_request" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.middleware.core.PostParamsMiddleware">
-<em class="property">class </em><tt class="descclassname">keystone.middleware.core.</tt><tt class="descname">PostParamsMiddleware</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.PostParamsMiddleware" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Middleware" title="keystone.common.wsgi.Middleware"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Middleware</span></tt></a></p>
-<p>Middleware to allow method arguments to be passed as POST parameters.</p>
-<p>Filters out the parameters <cite>self</cite>, <cite>context</cite> and anything beginning with
-an underscore.</p>
-<dl class="method">
-<dt id="keystone.middleware.core.PostParamsMiddleware.process_request">
-<tt class="descname">process_request</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.PostParamsMiddleware.process_request" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.middleware.core.TokenAuthMiddleware">
-<em class="property">class </em><tt class="descclassname">keystone.middleware.core.</tt><tt class="descname">TokenAuthMiddleware</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.TokenAuthMiddleware" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Middleware" title="keystone.common.wsgi.Middleware"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Middleware</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.middleware.core.TokenAuthMiddleware.process_request">
-<tt class="descname">process_request</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#keystone.middleware.core.TokenAuthMiddleware.process_request" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="core-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#core-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="ec2-token-module">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">ec2_token</span></tt> Module<a class="headerlink" href="#ec2-token-module" title="Permalink to this headline">¶</a></h2>

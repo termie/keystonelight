@@ -59,8 +59,8 @@
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
 <li><a class="reference internal" href="#">backends Package</a><ul>
-<li><a class="reference internal" href="#module-keystone.contrib.ec2.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-keystone.contrib.ec2.backends.sql"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
+<li><a class="reference internal" href="#kvs-module"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li><a class="reference internal" href="#sql-module"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
 </ul>
 </li>
 </ul>
@@ -93,99 +93,11 @@
             
   <div class="section" id="backends-package">
 <h1>backends Package<a class="headerlink" href="#backends-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-keystone.contrib.ec2.backends.kvs">
-<span id="kvs-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">kvs</span></tt> Module<a class="headerlink" href="#module-keystone.contrib.ec2.backends.kvs" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="keystone.contrib.ec2.backends.kvs.Ec2">
-<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.backends.kvs.</tt><tt class="descname">Ec2</tt><big>(</big><em>db=None</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.kvs.Ec2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.kvs.Base" title="keystone.common.kvs.Base"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.kvs.Base</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.kvs.Ec2.create_credential">
-<tt class="descname">create_credential</tt><big>(</big><em>credential_id</em>, <em>credential</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.kvs.Ec2.create_credential" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.kvs.Ec2.delete_credential">
-<tt class="descname">delete_credential</tt><big>(</big><em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.kvs.Ec2.delete_credential" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.kvs.Ec2.get_credential">
-<tt class="descname">get_credential</tt><big>(</big><em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.kvs.Ec2.get_credential" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.kvs.Ec2.list_credentials">
-<tt class="descname">list_credentials</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.kvs.Ec2.list_credentials" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="kvs-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">kvs</span></tt> Module<a class="headerlink" href="#kvs-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-keystone.contrib.ec2.backends.sql">
-<span id="sql-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">sql</span></tt> Module<a class="headerlink" href="#module-keystone.contrib.ec2.backends.sql" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2">
-<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.backends.sql.</tt><tt class="descname">Ec2</tt><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.sql.html#keystone.common.sql.core.Base" title="keystone.common.sql.core.Base"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.sql.core.Base</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2.create_credential">
-<tt class="descname">create_credential</tt><big>(</big><em>credential_id</em>, <em>credential</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2.create_credential" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2.delete_credential">
-<tt class="descname">delete_credential</tt><big>(</big><em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2.delete_credential" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2.get_credential">
-<tt class="descname">get_credential</tt><big>(</big><em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2.get_credential" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2.list_credentials">
-<tt class="descname">list_credentials</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2.list_credentials" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2Credential">
-<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.backends.sql.</tt><tt class="descname">Ec2Credential</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2Credential" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.Base</span></tt>, <a class="reference internal" href="keystone.common.sql.html#keystone.common.sql.core.DictBase" title="keystone.common.sql.core.DictBase"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.sql.core.DictBase</span></tt></a></p>
-<dl class="attribute">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2Credential.access">
-<tt class="descname">access</tt><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2Credential.access" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2Credential.from_dict">
-<em class="property">classmethod </em><tt class="descname">from_dict</tt><big>(</big><em>user_dict</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2Credential.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2Credential.secret">
-<tt class="descname">secret</tt><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2Credential.secret" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2Credential.tenant_id">
-<tt class="descname">tenant_id</tt><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2Credential.tenant_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2Credential.to_dict">
-<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2Credential.to_dict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="keystone.contrib.ec2.backends.sql.Ec2Credential.user_id">
-<tt class="descname">user_id</tt><a class="headerlink" href="#keystone.contrib.ec2.backends.sql.Ec2Credential.user_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="sql-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">sql</span></tt> Module<a class="headerlink" href="#sql-module" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

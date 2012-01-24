@@ -60,7 +60,7 @@
             <ul>
 <li><a class="reference internal" href="#">catalog Package</a><ul>
 <li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">catalog</span></tt> Package</a></li>
-<li><a class="reference internal" href="#module-keystone.catalog.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li><a class="reference internal" href="#core-module"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
 <li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 </ul>
 </li>
@@ -98,53 +98,17 @@
 <h1>catalog Package<a class="headerlink" href="#catalog-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">catalog</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-keystone.catalog"></span></div>
-<div class="section" id="module-keystone.catalog.core">
-<span id="core-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#module-keystone.catalog.core" title="Permalink to this headline">¶</a></h2>
-<p>Main entry point into the Catalog service.</p>
-<dl class="class">
-<dt id="keystone.catalog.core.Manager">
-<em class="property">class </em><tt class="descclassname">keystone.catalog.core.</tt><tt class="descname">Manager</tt><a class="headerlink" href="#keystone.catalog.core.Manager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.manager.Manager" title="keystone.common.manager.Manager"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.manager.Manager</span></tt></a></p>
-<p>Default pivot point for the Catalog backend.</p>
-<p>See <tt class="xref py py-mod docutils literal"><span class="pre">keystone.manager.Manager</span></tt> for more details on how this
-dynamically calls the backend.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.catalog.core.ServiceController">
-<em class="property">class </em><tt class="descclassname">keystone.catalog.core.</tt><tt class="descname">ServiceController</tt><a class="headerlink" href="#keystone.catalog.core.ServiceController" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.catalog.core.ServiceController.create_service">
-<tt class="descname">create_service</tt><big>(</big><em>context</em>, <em>OS_KSADM_service</em><big>)</big><a class="headerlink" href="#keystone.catalog.core.ServiceController.create_service" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.core.ServiceController.delete_service">
-<tt class="descname">delete_service</tt><big>(</big><em>context</em>, <em>service_id</em><big>)</big><a class="headerlink" href="#keystone.catalog.core.ServiceController.delete_service" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.core.ServiceController.get_service">
-<tt class="descname">get_service</tt><big>(</big><em>context</em>, <em>service_id</em><big>)</big><a class="headerlink" href="#keystone.catalog.core.ServiceController.get_service" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.core.ServiceController.get_services">
-<tt class="descname">get_services</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#keystone.catalog.core.ServiceController.get_services" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+</div>
+<div class="section" id="core-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#core-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="keystone.catalog.backends.html">backends Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="keystone.catalog.backends.html#module-keystone.catalog.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="keystone.catalog.backends.html#module-keystone.catalog.backends.templated"><tt class="docutils literal"><span class="pre">templated</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.catalog.backends.html#kvs-module"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.catalog.backends.html#templated-module"><tt class="docutils literal"><span class="pre">templated</span></tt> Module</a></li>
 </ul>
 </li>
 </ul>

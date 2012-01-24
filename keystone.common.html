@@ -63,9 +63,9 @@
 <li><a class="reference internal" href="#module-keystone.common.cfg"><tt class="docutils literal"><span class="pre">cfg</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-keystone.common.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-keystone.common.logging"><tt class="docutils literal"><span class="pre">logging</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-keystone.common.manager"><tt class="docutils literal"><span class="pre">manager</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-keystone.common.utils"><tt class="docutils literal"><span class="pre">utils</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-keystone.common.wsgi"><tt class="docutils literal"><span class="pre">wsgi</span></tt> Module</a></li>
+<li><a class="reference internal" href="#manager-module"><tt class="docutils literal"><span class="pre">manager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#utils-module"><tt class="docutils literal"><span class="pre">utils</span></tt> Module</a></li>
+<li><a class="reference internal" href="#wsgi-module"><tt class="docutils literal"><span class="pre">wsgi</span></tt> Module</a></li>
 <li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 </ul>
 </li>
@@ -115,7 +115,7 @@ make all calls through httplib.</p>
 </div>
 <dl class="class">
 <dt id="keystone.common.bufferedhttp.BufferedHTTPConnection">
-<em class="property">class </em><tt class="descclassname">keystone.common.bufferedhttp.</tt><tt class="descname">BufferedHTTPConnection</tt><big>(</big><em>host</em>, <em>port=None</em>, <em>strict=None</em>, <em>timeout=&lt;object object at 0x2adeaa81e510&gt;</em>, <em>source_address=None</em><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">keystone.common.bufferedhttp.</tt><tt class="descname">BufferedHTTPConnection</tt><big>(</big><em>host</em>, <em>port=None</em>, <em>strict=None</em>, <em>timeout=&lt;object object at 0x2b55c5710510&gt;</em>, <em>source_address=None</em><big>)</big><a class="headerlink" href="#keystone.common.bufferedhttp.BufferedHTTPConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">httplib.HTTPConnection</span></tt></p>
 <p>HTTPConnection class that uses BufferedHTTPResponse</p>
 <dl class="method">
@@ -479,12 +479,12 @@ help=&#8217;connection string for sql database&#8217;),</dd>
 
 <dl class="attribute">
 <dt id="keystone.common.cfg.CommonConfigOpts.common_cli_opts">
-<tt class="descname">common_cli_opts</tt><em class="property"> = [&lt;keystone.common.cfg.BoolOpt object at 0x3938990&gt;, &lt;keystone.common.cfg.BoolOpt object at 0x39389d0&gt;]</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.common_cli_opts" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">common_cli_opts</tt><em class="property"> = [&lt;keystone.common.cfg.BoolOpt object at 0x249e990&gt;, &lt;keystone.common.cfg.BoolOpt object at 0x249e9d0&gt;]</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.common_cli_opts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="keystone.common.cfg.CommonConfigOpts.logging_cli_opts">
-<tt class="descname">logging_cli_opts</tt><em class="property"> = [&lt;keystone.common.cfg.StrOpt object at 0x3938a10&gt;, &lt;keystone.common.cfg.StrOpt object at 0x3938a50&gt;, &lt;keystone.common.cfg.StrOpt object at 0x3938a90&gt;, &lt;keystone.common.cfg.StrOpt object at 0x3938ad0&gt;, &lt;keystone.common.cfg.StrOpt object at 0x3938b10&gt;, &lt;keystone.common.cfg.StrOpt object at 0x3938b50&gt;, &lt;keystone.common.cfg.BoolOpt object at 0x3938b90&gt;]</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.logging_cli_opts" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">logging_cli_opts</tt><em class="property"> = [&lt;keystone.common.cfg.StrOpt object at 0x249ea10&gt;, &lt;keystone.common.cfg.StrOpt object at 0x249ea50&gt;, &lt;keystone.common.cfg.StrOpt object at 0x249ea90&gt;, &lt;keystone.common.cfg.StrOpt object at 0x249ead0&gt;, &lt;keystone.common.cfg.StrOpt object at 0x249eb10&gt;, &lt;keystone.common.cfg.StrOpt object at 0x249eb50&gt;, &lt;keystone.common.cfg.BoolOpt object at 0x249eb90&gt;]</em><a class="headerlink" href="#keystone.common.cfg.CommonConfigOpts.logging_cli_opts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -882,286 +882,14 @@ and ~/.foo/bar.conf all exist, then we return [&#8216;/etc/foo/foo.conf&#8217;,
 <dd></dd></dl>
 
 </div>
-<div class="section" id="module-keystone.common.manager">
-<span id="manager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">manager</span></tt> Module<a class="headerlink" href="#module-keystone.common.manager" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="keystone.common.manager.Manager">
-<em class="property">class </em><tt class="descclassname">keystone.common.manager.</tt><tt class="descname">Manager</tt><big>(</big><em>driver_name</em><big>)</big><a class="headerlink" href="#keystone.common.manager.Manager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Base class for intermediary request layer.</p>
-<p>The Manager layer exists to support additional logic that applies to all
-or some of the methods exposed by a service that are not specific to the
-HTTP interface.</p>
-<p>It also provides a stable entry point to dynamic backends.</p>
-<p>An example of a probable use case is logging all the calls.</p>
-</dd></dl>
-
+<div class="section" id="manager-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">manager</span></tt> Module<a class="headerlink" href="#manager-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-keystone.common.utils">
-<span id="utils-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">utils</span></tt> Module<a class="headerlink" href="#module-keystone.common.utils" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="keystone.common.utils.Ec2Signer">
-<em class="property">class </em><tt class="descclassname">keystone.common.utils.</tt><tt class="descname">Ec2Signer</tt><big>(</big><em>secret_key</em><big>)</big><a class="headerlink" href="#keystone.common.utils.Ec2Signer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Hacked up code from boto/connection.py</p>
-<dl class="method">
-<dt id="keystone.common.utils.Ec2Signer.generate">
-<tt class="descname">generate</tt><big>(</big><em>credentials</em><big>)</big><a class="headerlink" href="#keystone.common.utils.Ec2Signer.generate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate auth string according to what SignatureVersion is given.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.utils.SmarterEncoder">
-<em class="property">class </em><tt class="descclassname">keystone.common.utils.</tt><tt class="descname">SmarterEncoder</tt><big>(</big><em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>encoding='utf-8'</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#keystone.common.utils.SmarterEncoder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">json.encoder.JSONEncoder</span></tt></p>
-<p>Help for JSON encoding dict-like objects.</p>
-<dl class="method">
-<dt id="keystone.common.utils.SmarterEncoder.default">
-<tt class="descname">default</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#keystone.common.utils.SmarterEncoder.default" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="keystone.common.utils.check_output">
-<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">check_output</tt><big>(</big><em>*popenargs</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#keystone.common.utils.check_output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run command with arguments and return its output as a byte string.</p>
-<p>If the exit code was non-zero it raises a CalledProcessError.  The
-CalledProcessError object will have the return code in the returncode
-attribute and output in the output attribute.</p>
-<p>The arguments are the same as for the Popen constructor.  Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">check_output</span><span class="p">([</span><span class="s">&quot;ls&quot;</span><span class="p">,</span> <span class="s">&quot;-l&quot;</span><span class="p">,</span> <span class="s">&quot;/dev/null&quot;</span><span class="p">])</span>
-<span class="go">&#39;crw-rw-rw- 1 root root 1, 3 Oct 18  2007 /dev/null\n&#39;</span>
-</pre></div>
+<div class="section" id="utils-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">utils</span></tt> Module<a class="headerlink" href="#utils-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<p>The stdout argument is not allowed as it is used internally.
-To capture standard error in the result, use stderr=STDOUT.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">check_output</span><span class="p">([</span><span class="s">&quot;/bin/sh&quot;</span><span class="p">,</span> <span class="s">&quot;-c&quot;</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="s">&quot;ls -l non_existent_file ; exit 0&quot;</span><span class="p">],</span>
-<span class="gp">... </span>             <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">)</span>
-<span class="go">&#39;ls: non_existent_file: No such file or directory\n&#39;</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="keystone.common.utils.git">
-<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">git</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#keystone.common.utils.git" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="keystone.common.utils.import_class">
-<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">import_class</tt><big>(</big><em>import_str</em><big>)</big><a class="headerlink" href="#keystone.common.utils.import_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a class from a string including module and class.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="keystone.common.utils.import_object">
-<tt class="descclassname">keystone.common.utils.</tt><tt class="descname">import_object</tt><big>(</big><em>import_str</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.common.utils.import_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an object including a module or module and class.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-keystone.common.wsgi">
-<span id="wsgi-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">wsgi</span></tt> Module<a class="headerlink" href="#module-keystone.common.wsgi" title="Permalink to this headline">¶</a></h2>
-<p>Utility methods for working with WSGI servers.</p>
-<dl class="class">
-<dt id="keystone.common.wsgi.Application">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Application</tt><a class="headerlink" href="#keystone.common.wsgi.Application" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.BaseApplication" title="keystone.common.wsgi.BaseApplication"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.BaseApplication</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.common.wsgi.Application.assert_admin">
-<tt class="descname">assert_admin</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Application.assert_admin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.BaseApplication">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">BaseApplication</tt><a class="headerlink" href="#keystone.common.wsgi.BaseApplication" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Base WSGI application wrapper. Subclasses need to implement __call__.</p>
-<dl class="classmethod">
-<dt id="keystone.common.wsgi.BaseApplication.factory">
-<em class="property">classmethod </em><tt class="descname">factory</tt><big>(</big><em>global_config</em>, <em>**local_config</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.BaseApplication.factory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used for paste app factories in paste.deploy config files.</p>
-<p>Any local configuration (that is, values under the [app:APPNAME]
-section of the paste config) will be passed into the <cite>__init__</cite> method
-as kwargs.</p>
-<p>A hypothetical configuration would look like:</p>
-<blockquote>
-<div>[app:wadl]
-latest_version = 1.3
-paste.app_factory = nova.api.fancy_api:Wadl.factory</div></blockquote>
-<p>which would result in a call to the <cite>Wadl</cite> class as</p>
-<blockquote>
-<div>import nova.api.fancy_api
-fancy_api.Wadl(latest_version=&#8216;1.3&#8217;)</div></blockquote>
-<p>You could of course re-implement the <cite>factory</cite> method in subclasses,
-but using the kwarg passing it shouldn&#8217;t be necessary.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.ComposableRouter">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">ComposableRouter</tt><big>(</big><em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ComposableRouter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Router" title="keystone.common.wsgi.Router"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Router</span></tt></a></p>
-<p>Router that supports use by ComposingRouter.</p>
-<dl class="method">
-<dt id="keystone.common.wsgi.ComposableRouter.add_routes">
-<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ComposableRouter.add_routes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add routes to given mapper.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.ComposingRouter">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">ComposingRouter</tt><big>(</big><em>mapper=None</em>, <em>routers=None</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ComposingRouter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Router" title="keystone.common.wsgi.Router"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Router</span></tt></a></p>
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.Debug">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Debug</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Debug" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Middleware" title="keystone.common.wsgi.Middleware"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Middleware</span></tt></a></p>
-<p>Helper class for debugging a WSGI application.</p>
-<p>Can be inserted into any WSGI application chain to get information
-about the request and response.</p>
-<dl class="staticmethod">
-<dt id="keystone.common.wsgi.Debug.print_generator">
-<em class="property">static </em><tt class="descname">print_generator</tt><big>(</big><em>app_iter</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Debug.print_generator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterator that prints the contents of a wrapper string.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.ExtensionRouter">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">ExtensionRouter</tt><big>(</big><em>application</em>, <em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ExtensionRouter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Router" title="keystone.common.wsgi.Router"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Router</span></tt></a></p>
-<p>A router that allows extensions to supplement or overwrite routes.</p>
-<p>Expects to be subclassed.</p>
-<dl class="method">
-<dt id="keystone.common.wsgi.ExtensionRouter.add_routes">
-<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ExtensionRouter.add_routes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="keystone.common.wsgi.ExtensionRouter.factory">
-<em class="property">classmethod </em><tt class="descname">factory</tt><big>(</big><em>global_config</em>, <em>**local_config</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.ExtensionRouter.factory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used for paste app factories in paste.deploy config files.</p>
-<p>Any local configuration (that is, values under the [filter:APPNAME]
-section of the paste config) will be passed into the <cite>__init__</cite> method
-as kwargs.</p>
-<p>A hypothetical configuration would look like:</p>
-<blockquote>
-<div>[filter:analytics]
-redis_host = 127.0.0.1
-paste.filter_factory = nova.api.analytics:Analytics.factory</div></blockquote>
-<p>which would result in a call to the <cite>Analytics</cite> class as</p>
-<blockquote>
-<div>import nova.api.analytics
-analytics.Analytics(app_from_paste, redis_host=&#8216;127.0.0.1&#8217;)</div></blockquote>
-<p>You could of course re-implement the <cite>factory</cite> method in subclasses,
-but using the kwarg passing it shouldn&#8217;t be necessary.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.Middleware">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Middleware</tt><big>(</big><em>application</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
-<p>Base WSGI middleware.</p>
-<p>These classes require an application to be
-initialized that will be called next.  By default the middleware will
-simply call its wrapped app, or you can override __call__ to customize its
-behavior.</p>
-<dl class="classmethod">
-<dt id="keystone.common.wsgi.Middleware.factory">
-<em class="property">classmethod </em><tt class="descname">factory</tt><big>(</big><em>global_config</em>, <em>**local_config</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware.factory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used for paste app factories in paste.deploy config files.</p>
-<p>Any local configuration (that is, values under the [filter:APPNAME]
-section of the paste config) will be passed into the <cite>__init__</cite> method
-as kwargs.</p>
-<p>A hypothetical configuration would look like:</p>
-<blockquote>
-<div>[filter:analytics]
-redis_host = 127.0.0.1
-paste.filter_factory = nova.api.analytics:Analytics.factory</div></blockquote>
-<p>which would result in a call to the <cite>Analytics</cite> class as</p>
-<blockquote>
-<div>import nova.api.analytics
-analytics.Analytics(app_from_paste, redis_host=&#8216;127.0.0.1&#8217;)</div></blockquote>
-<p>You could of course re-implement the <cite>factory</cite> method in subclasses,
-but using the kwarg passing it shouldn&#8217;t be necessary.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="keystone.common.wsgi.Middleware.process_request">
-<tt class="descname">process_request</tt><big>(</big><em>req</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware.process_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Called on each request.</p>
-<p>If this returns None, the next application down the stack will be
-executed. If it returns a response then that response will be returned
-and execution will stop here.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="keystone.common.wsgi.Middleware.process_response">
-<tt class="descname">process_response</tt><big>(</big><em>response</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Middleware.process_response" title="Permalink to this definition">¶</a></dt>
-<dd><p>Do whatever you&#8217;d like to the response.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.Request">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Request</tt><big>(</big><em>environ=None</em>, <em>environ_getter=None</em>, <em>charset=(No Default)</em>, <em>unicode_errors=(No Default)</em>, <em>decode_param_names=(No Default)</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">webob.request.Request</span></tt></p>
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.Router">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Router</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Router" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>WSGI middleware that maps incoming requests to WSGI apps.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.Server">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">Server</tt><big>(</big><em>application</em>, <em>port</em>, <em>threads=1000</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Server" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Server class to manage multiple WSGI sockets and applications.</p>
-<dl class="method">
-<dt id="keystone.common.wsgi.Server.start">
-<tt class="descname">start</tt><big>(</big><em>host='0.0.0.0'</em>, <em>key=None</em>, <em>backlog=128</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Server.start" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run a WSGI server with the given application.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="keystone.common.wsgi.Server.wait">
-<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.common.wsgi.Server.wait" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wait until all servers have completed running.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.common.wsgi.WritableLogger">
-<em class="property">class </em><tt class="descclassname">keystone.common.wsgi.</tt><tt class="descname">WritableLogger</tt><big>(</big><em>logger</em>, <em>level=10</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.WritableLogger" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>A thin wrapper that responds to <cite>write</cite> and logs.</p>
-<dl class="method">
-<dt id="keystone.common.wsgi.WritableLogger.write">
-<tt class="descname">write</tt><big>(</big><em>msg</em><big>)</big><a class="headerlink" href="#keystone.common.wsgi.WritableLogger.write" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="wsgi-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">wsgi</span></tt> Module<a class="headerlink" href="#wsgi-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
@@ -1177,7 +905,7 @@ and execution will stop here.</p>
 <li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#module-keystone.common.sql.migrate_repo.manage"><tt class="docutils literal"><span class="pre">manage</span></tt> Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="keystone.common.sql.migrate_repo.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html">versions Package</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html#module-keystone.common.sql.migrate_repo.versions.001_add_initial_tables"><tt class="docutils literal"><span class="pre">001_add_initial_tables</span></tt> Module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="keystone.common.sql.migrate_repo.versions.html#add-initial-tables-module"><tt class="docutils literal"><span class="pre">001_add_initial_tables</span></tt> Module</a></li>
 </ul>
 </li>
 </ul>

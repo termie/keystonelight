@@ -60,7 +60,7 @@
             <ul>
 <li><a class="reference internal" href="#">ec2 Package</a><ul>
 <li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">ec2</span></tt> Package</a></li>
-<li><a class="reference internal" href="#module-keystone.contrib.ec2.core"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
+<li><a class="reference internal" href="#core-module"><tt class="docutils literal"><span class="pre">core</span></tt> Module</a></li>
 <li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
 </ul>
 </li>
@@ -98,179 +98,17 @@
 <h1>ec2 Package<a class="headerlink" href="#ec2-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">ec2</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-keystone.contrib.ec2"></span></div>
-<div class="section" id="module-keystone.contrib.ec2.core">
-<span id="core-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#module-keystone.contrib.ec2.core" title="Permalink to this headline">¶</a></h2>
-<p>Main entry point into the EC2 Credentials service.</p>
-<p>This service allows the creation of access/secret credentials used for
-the ec2 interop layer of OpenStack.</p>
-<p>A user can create as many access/secret pairs, each of which map to a
-specific tenant.  This is required because OpenStack supports a user
-belonging to multiple tenants, whereas the signatures created on ec2-style
-requests don&#8217;t allow specification of which tenant the user wishs to act
-upon.</p>
-<p>To complete the cycle, we provide a method that OpenStack services can
-use to validate a signature and get a corresponding openstack token.  This
-token allows method calls to other services within the context the
-access/secret was created.  As an example, nova requests keystone to validate
-the signature of a request, receives a token, and then makes a request to
-glance to list images needed to perform the requested task.</p>
-<dl class="class">
-<dt id="keystone.contrib.ec2.core.Ec2Controller">
-<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.core.</tt><tt class="descname">Ec2Controller</tt><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.Application" title="keystone.common.wsgi.Application"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.Application</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.contrib.ec2.core.Ec2Controller.authenticate_ec2">
-<tt class="descname">authenticate_ec2</tt><big>(</big><em>context</em>, <em>credentials=None</em>, <em>ec2Credentials=None</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.authenticate_ec2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Validate a signed EC2 request and provide a token.</p>
-<p>Other services (such as Nova) use this <strong>admin</strong> call to determine
-if a request they signed received is from a valid user.</p>
-<p>If it is a valid signature, an openstack token that maps
-to the user/tenant is returned to the caller, along with
-all the other details returned from a normal token validation
-call.</p>
-<p>The returned token is useful for making calls to other
-OpenStack services within the context of the request.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>context</strong> &#8211; standard context</li>
-<li><strong>credentials</strong> &#8211; dict of ec2 signature</li>
-<li><strong>ec2Credentials</strong> &#8211; DEPRECATED dict of ec2 signature</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">token: openstack token equivalent to access key along
-with the corresponding service catalog and roles</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.core.Ec2Controller.create_credential">
-<tt class="descname">create_credential</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>tenant_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.create_credential" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a secret/access pair for use with ec2 style auth.</p>
-<p>Generates a new set of credentials that map the the user/tenant
-pair.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>context</strong> &#8211; standard context</li>
-<li><strong>user_id</strong> &#8211; id of user</li>
-<li><strong>tenant_id</strong> &#8211; id of tenant</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">credential: dict of ec2 credential</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.core.Ec2Controller.delete_credential">
-<tt class="descname">delete_credential</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.delete_credential" title="Permalink to this definition">¶</a></dt>
-<dd><p>Delete a user&#8217;s access/secret pair.</p>
-<p>Used to revoke a user&#8217;s access/secret pair</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>context</strong> &#8211; standard context</li>
-<li><strong>user_id</strong> &#8211; id of user</li>
-<li><strong>credential_id</strong> &#8211; access key for credentials</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">bool: success</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.core.Ec2Controller.get_credential">
-<tt class="descname">get_credential</tt><big>(</big><em>context</em>, <em>user_id</em>, <em>credential_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.get_credential" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retreive a user&#8217;s access/secret pair by the access key.</p>
-<p>Grab the full access/secret pair for a given access key.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>context</strong> &#8211; standard context</li>
-<li><strong>user_id</strong> &#8211; id of user</li>
-<li><strong>credential_id</strong> &#8211; access key for credentials</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">credential: dict of ec2 credential</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="keystone.contrib.ec2.core.Ec2Controller.get_credentials">
-<tt class="descname">get_credentials</tt><big>(</big><em>context</em>, <em>user_id</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller.get_credentials" title="Permalink to this definition">¶</a></dt>
-<dd><p>List all credentials for a user.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>context</strong> &#8211; standard context</li>
-<li><strong>user_id</strong> &#8211; id of user</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">credentials: list of ec2 credential dicts</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.contrib.ec2.core.Ec2Extension">
-<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.core.</tt><tt class="descname">Ec2Extension</tt><big>(</big><em>application</em>, <em>mapper=None</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Extension" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.wsgi.ExtensionRouter" title="keystone.common.wsgi.ExtensionRouter"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.wsgi.ExtensionRouter</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.contrib.ec2.core.Ec2Extension.add_routes">
-<tt class="descname">add_routes</tt><big>(</big><em>mapper</em><big>)</big><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Extension.add_routes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="keystone.contrib.ec2.core.Manager">
-<em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.core.</tt><tt class="descname">Manager</tt><a class="headerlink" href="#keystone.contrib.ec2.core.Manager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.manager.Manager" title="keystone.common.manager.Manager"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.manager.Manager</span></tt></a></p>
-<p>Default pivot point for the EC2 Credentials backend.</p>
-<p>See <tt class="xref py py-mod docutils literal"><span class="pre">keystone.manager.Manager</span></tt> for more details on how this
-dynamically calls the backend.</p>
-</dd></dl>
-
+</div>
+<div class="section" id="core-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">core</span></tt> Module<a class="headerlink" href="#core-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="keystone.contrib.ec2.backends.html">backends Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="keystone.contrib.ec2.backends.html#module-keystone.contrib.ec2.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="keystone.contrib.ec2.backends.html#module-keystone.contrib.ec2.backends.sql"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.contrib.ec2.backends.html#kvs-module"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keystone.contrib.ec2.backends.html#sql-module"><tt class="docutils literal"><span class="pre">sql</span></tt> Module</a></li>
 </ul>
 </li>
 </ul>

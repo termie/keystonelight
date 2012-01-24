@@ -59,8 +59,8 @@
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
 <li><a class="reference internal" href="#">backends Package</a><ul>
-<li><a class="reference internal" href="#module-keystone.catalog.backends.kvs"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
-<li><a class="reference internal" href="#module-keystone.catalog.backends.templated"><tt class="docutils literal"><span class="pre">templated</span></tt> Module</a></li>
+<li><a class="reference internal" href="#kvs-module"><tt class="docutils literal"><span class="pre">kvs</span></tt> Module</a></li>
+<li><a class="reference internal" href="#templated-module"><tt class="docutils literal"><span class="pre">templated</span></tt> Module</a></li>
 </ul>
 </li>
 </ul>
@@ -93,82 +93,11 @@
             
   <div class="section" id="backends-package">
 <h1>backends Package<a class="headerlink" href="#backends-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-keystone.catalog.backends.kvs">
-<span id="kvs-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">kvs</span></tt> Module<a class="headerlink" href="#module-keystone.catalog.backends.kvs" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="keystone.catalog.backends.kvs.Catalog">
-<em class="property">class </em><tt class="descclassname">keystone.catalog.backends.kvs.</tt><tt class="descname">Catalog</tt><big>(</big><em>db=None</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.kvs.Catalog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="keystone.common.html#keystone.common.kvs.Base" title="keystone.common.kvs.Base"><tt class="xref py py-class docutils literal"><span class="pre">keystone.common.kvs.Base</span></tt></a></p>
-<dl class="method">
-<dt id="keystone.catalog.backends.kvs.Catalog.create_service">
-<tt class="descname">create_service</tt><big>(</big><em>service_id</em>, <em>service</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.kvs.Catalog.create_service" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.backends.kvs.Catalog.delete_service">
-<tt class="descname">delete_service</tt><big>(</big><em>service_id</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.kvs.Catalog.delete_service" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.backends.kvs.Catalog.get_catalog">
-<tt class="descname">get_catalog</tt><big>(</big><em>user_id</em>, <em>tenant_id</em>, <em>metadata=None</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.kvs.Catalog.get_catalog" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.backends.kvs.Catalog.get_service">
-<tt class="descname">get_service</tt><big>(</big><em>service_id</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.kvs.Catalog.get_service" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.backends.kvs.Catalog.list_services">
-<tt class="descname">list_services</tt><big>(</big><big>)</big><a class="headerlink" href="#keystone.catalog.backends.kvs.Catalog.list_services" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="keystone.catalog.backends.kvs.Catalog.update_service">
-<tt class="descname">update_service</tt><big>(</big><em>service_id</em>, <em>service</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.kvs.Catalog.update_service" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="kvs-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">kvs</span></tt> Module<a class="headerlink" href="#kvs-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-keystone.catalog.backends.templated">
-<span id="templated-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">templated</span></tt> Module<a class="headerlink" href="#module-keystone.catalog.backends.templated" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="keystone.catalog.backends.templated.TemplatedCatalog">
-<em class="property">class </em><tt class="descclassname">keystone.catalog.backends.templated.</tt><tt class="descname">TemplatedCatalog</tt><big>(</big><em>templates=None</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.templated.TemplatedCatalog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#keystone.catalog.backends.kvs.Catalog" title="keystone.catalog.backends.kvs.Catalog"><tt class="xref py py-class docutils literal"><span class="pre">keystone.catalog.backends.kvs.Catalog</span></tt></a></p>
-<p>A backend that generates endpoints for the Catalog based on templates.</p>
-<p>It is usually configured via config entries that look like:</p>
-<blockquote>
-<div>catalog.$REGION.$SERVICE.$key = $value</div></blockquote>
-<p>and is stored in a similar looking hierarchy. Where a value can contain
-values to be interpolated by standard python string interpolation that look
-like (the % is replaced by a $ due to paste attmepting to interpolate on
-its own:</p>
-<blockquote>
-<div><a class="reference external" href="http://localhost:$(public_port)s/">http://localhost:$(public_port)s/</a></div></blockquote>
-<p>When expanding the template it will pass in a dict made up of the conf
-instance plus a few additional key-values, notably tenant_id and user_id.</p>
-<p>It does not care what the keys and values are but it is worth noting that
-keystone_compat will expect certain keys to be there so that it can munge
-them into the output format keystone expects. These keys are:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>name - the name of the service, most likely repeated for all services of</dt>
-<dd>the same type, across regions.</dd>
-</dl>
-<p>adminURL - the url of the admin endpoint
-publicURL - the url of the public endpoint
-internalURL - the url of the internal endpoint</p>
-</div></blockquote>
-<dl class="method">
-<dt id="keystone.catalog.backends.templated.TemplatedCatalog.get_catalog">
-<tt class="descname">get_catalog</tt><big>(</big><em>user_id</em>, <em>tenant_id</em>, <em>metadata=None</em><big>)</big><a class="headerlink" href="#keystone.catalog.backends.templated.TemplatedCatalog.get_catalog" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="templated-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">templated</span></tt> Module<a class="headerlink" href="#templated-module" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
