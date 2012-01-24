@@ -113,8 +113,8 @@ upon.</p>
 use to validate a signature and get a corresponding openstack token.  This
 token allows method calls to other services within the context the
 access/secret was created.  As an example, nova requests keystone to validate
-the signature of a request, receives a token, and then makes a request to glance
-to list images needed to perform the requested task.</p>
+the signature of a request, receives a token, and then makes a request to
+glance to list images needed to perform the requested task.</p>
 <dl class="class">
 <dt id="keystone.contrib.ec2.core.Ec2Controller">
 <em class="property">class </em><tt class="descclassname">keystone.contrib.ec2.core.</tt><tt class="descname">Ec2Controller</tt><a class="headerlink" href="#keystone.contrib.ec2.core.Ec2Controller" title="Permalink to this definition">¶</a></dt>
@@ -129,7 +129,7 @@ if a request they signed received is from a valid user.</p>
 to the user/tenant is returned to the caller, along with
 all the other details returned from a normal token validation
 call.</p>
-<p>The returned token is useful for making calls to other 
+<p>The returned token is useful for making calls to other
 OpenStack services within the context of the request.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
