@@ -1,6 +1,14 @@
 keystone Package
 ================
 
+:mod:`cli` Module
+-----------------
+
+.. automodule:: keystone.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`config` Module
 --------------------
 
