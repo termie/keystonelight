@@ -367,8 +367,11 @@ class KcMasterTestCase(CompatTestCase):
                                          service_type='test',
                                          description='test')
         services = client.services.list()
-        # TODO(devcamcar): This assert should be more specific.
-        self.assertTrue(len(services) > 0)
+        listed = [s for s in services if s.id == service.id][0]
+        self.assertEquals(service.id, client.services.find(id=service.id).id)
+        self.assertEquals(service.name, listed.name)
+        self.assertEquals(service.type, listed.type)
+        self.assertEquals(service.description, listed.description)
 
     def test_admin_requires_adminness(self):
         from keystoneclient import exceptions as client_exceptions
