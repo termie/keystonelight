@@ -169,26 +169,26 @@ class KcMasterTestCase(CompatTestCase):
 
     def test_tenant_add_and_remove_user(self):
         client = self.get_client()
-        client.roles.add_user_to_tenant(tenant_id=self.tenant_baz['id'],
-                                        user_id=self.user_foo['id'],
-                                        role_id=self.role_useless['id'])
+        client.roles.grant_role(tenant=self.tenant_baz['id'],
+                                        user=self.user_foo['id'],
+                                        role=self.role_useless['id'])
         tenant_refs = client.tenants.list()
         self.assert_(self.tenant_baz['id'] in
                      [x.id for x in tenant_refs])
 
         # get the "role_refs" so we get the proper id, this is how the clients
         # do it
-        roleref_refs = client.roles.get_user_role_refs(
-                user_id=self.user_foo['id'])
+        roleref_refs = client.roles.list_grants(
+                user=self.user_foo['id'])
         for roleref_ref in roleref_refs:
-          if (roleref_ref.roleId == self.role_useless['id'] and
-              roleref_ref.tenantId == self.tenant_baz['id']):
-            # use python's scope fall through to leave roleref_ref set
-            break
+            if (roleref_ref.roleId == self.role_useless['id'] and
+                    roleref_ref.tenantId == self.tenant_baz['id']):
+                # use python's scope fall through to leave roleref_ref set
+                break
 
-        client.roles.remove_user_from_tenant(tenant_id=self.tenant_baz['id'],
-                                             user_id=self.user_foo['id'],
-                                             role_id=roleref_ref.id)
+        client.roles.revoke_role(tenant=self.tenant_baz['id'],
+                                             user=self.user_foo['id'],
+                                             role=roleref_ref.id)
 
         tenant_refs = client.tenants.list()
         self.assert_(self.tenant_baz['id'] not in
@@ -288,7 +288,7 @@ class KcMasterTestCase(CompatTestCase):
 
     def test_roles_get_by_user(self):
         client = self.get_client()
-        roles = client.roles.get_user_role_refs(user_id='foo')
+        roles = client.roles.list_grants(user='foo')
         self.assertTrue(len(roles) > 0)
 
     def test_ec2_credential_crud(self):
@@ -368,8 +368,11 @@ class KcMasterTestCase(CompatTestCase):
                                          service_type='test',
                                          description='test')
         services = client.services.list()
-        # TODO(devcamcar): This assert should be more specific.
-        self.assertTrue(len(services) > 0)
+        listed = [s for s in services if s.id == service.id][0]
+        self.assertEquals(service.id, client.services.find(id=service.id).id)
+        self.assertEquals(service.name, listed.name)
+        self.assertEquals(service.type, listed.type)
+        self.assertEquals(service.description, listed.description)
 
     def test_admin_requires_adminness(self):
         from keystoneclient import exceptions as client_exceptions

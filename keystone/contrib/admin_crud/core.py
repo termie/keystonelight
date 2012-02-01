@@ -86,10 +86,10 @@ class CrudExtension(wsgi.ExtensionRouter):
 
         # User Roles
         mapper.connect("/users/{user_id}/roles/OS-KSADM/{role_id}",
-            controller=role_controller, action="add_role_to_user",
+            controller=role_controller, action="grant_role",
             conditions=dict(method=["PUT"]))
         mapper.connect("/users/{user_id}/roles/OS-KSADM/{role_id}",
-            controller=role_controller, action="delete_role_from_user",
+            controller=role_controller, action="revoke_role",
             conditions=dict(method=["DELETE"]))
 
         # COMPAT(diablo): User Roles
@@ -106,11 +106,11 @@ class CrudExtension(wsgi.ExtensionRouter):
         # User-Tenant Roles
         mapper.connect(
             "/tenants/{tenant_id}/users/{user_id}/roles/OS-KSADM/{role_id}",
-            controller=role_controller, action="add_role_to_user",
+            controller=role_controller, action="grant_role",
             conditions=dict(method=["PUT"]))
         mapper.connect(
             "/tenants/{tenant_id}/users/{user_id}/roles/OS-KSADM/{role_id}",
-            controller=role_controller, action="delete_role_from_user",
+            controller=role_controller, action="revoke_role",
             conditions=dict(method=["DELETE"]))
 
         # Service Operations
