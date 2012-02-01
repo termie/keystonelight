@@ -207,11 +207,11 @@ class AdminRouter(wsgi.ComposableRouter):
         roles_controller = RoleController()
         mapper.connect('/tenants/{tenant_id}/users/{user_id}/roles',
                        controller=roles_controller,
-                       action='get_user_roles',
+                       action='list_grants',
                        conditions=dict(method=['GET']))
         mapper.connect('/users/{user_id}/roles',
-                       controller=user_controller,
-                       action='get_user_roles',
+                       controller=roles_controller,
+                       action='list_grants',
                        conditions=dict(method=['GET']))
 
 
@@ -366,9 +366,6 @@ class RoleController(wsgi.Application):
         self.policy_api = policy.Manager()
         super(RoleController, self).__init__()
 
-    def get_user_roles(self, context, user_id, tenant_id=None):
-        raise NotImplemented()
-
     # CRUD extension
     def get_role(self, context, role_id):
         self.assert_admin(context)
@@ -387,7 +384,7 @@ class RoleController(wsgi.Application):
 
     def delete_role(self, context, role_id):
         self.assert_admin(context)
-        role_ref = self.identity_api.delete_role(context, role_id)
+        self.identity_api.delete_role(context, role_id)
 
     def get_roles(self, context):
         self.assert_admin(context)
@@ -395,9 +392,11 @@ class RoleController(wsgi.Application):
         # TODO(termie): probably inefficient at some point
         return {'roles': roles}
 
-    # COMPAT(diablo): CRUD extension
-    def get_role_refs(self, context, user_id):
-        """Ultimate hack to get around having to make role_refs first-class.
+    def list_grants(self, context, user_id, tenant_id=None):
+        """Lists all roles granted to a user, and optionally within the
+        context of a specific tenant.
+
+        Ultimate hack to get around having to make role_refs first-class.
 
         This will basically iterate over the various roles the user has in
         all tenants the user is a member of and create fake role_refs where
@@ -406,7 +405,7 @@ class RoleController(wsgi.Application):
 
         """
         self.assert_admin(context)
-        user_ref = self.identity_api.get_user(context, user_id)
+        self.identity_api.get_user(context, user_id)
         tenant_ids = self.identity_api.get_tenants_for_user(context, user_id)
         o = []
         for tenant_id in tenant_ids:
@@ -420,39 +419,29 @@ class RoleController(wsgi.Application):
                 o.append(ref)
         return {'roles': o}
 
-    def create_role_ref(self, context, user_id, role):
-        """This is actually used for adding a user to a tenant.
-
-        In the legacy data model adding a user to a tenant required setting
-        a role.
-
-        """
-        self.assert_admin(context)
-        # TODO(termie): for now we're ignoring the actual role
-        tenant_id = role.get('tenantId')
-        role_id = role.get('roleId')
+    def grant_role(self, context, role_id, user_id, tenant_id=None):
+        """Grants a role to a user, optionally on a specific tenant"""
         self.identity_api.add_user_to_tenant(context, tenant_id, user_id)
         self.identity_api.add_role_to_user_and_tenant(
                 context, user_id, tenant_id, role_id)
         role_ref = self.identity_api.get_role(context, role_id)
         return {'role': role_ref}
 
-    def delete_role_ref(self, context, user_id, role_ref_id):
-        """This is actually used for deleting a user from a tenant.
+    def revoke_role(self, context, role_id, user_id, tenant_id=None):
+        """Revokes a role from a user, optionally from a specific tenant_id
 
-        In the legacy data model removing a user from a tenant required
-        deleting a role.
-
-        To emulate this, we encode the tenant and role in the role_ref_id,
+        We encode the tenant and role in the role_ref_id,
         and if this happens to be the last role for the user-tenant pair,
         we remove the user from the tenant.
 
         """
+
         self.assert_admin(context)
-        # TODO(termie): for now we're ignoring the actual role
-        role_ref_ref = urlparse.parse_qs(role_ref_id)
+
+        role_ref_ref = urlparse.parse_qs(role_id)
         tenant_id = role_ref_ref.get('tenantId')[0]
         role_id = role_ref_ref.get('roleId')[0]
+
         self.identity_api.remove_role_from_user_and_tenant(
                 context, user_id, tenant_id, role_id)
         roles = self.identity_api.get_roles_for_user_and_tenant(
