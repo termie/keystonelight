@@ -17,8 +17,8 @@
 
 import webob
 
-from swift.common import utils
-from swift.common.middleware import acl
+from swift.common import utils as swift_utils
+from swift.common.middleware import acl as swift_acl
 
 
 class SwiftAuth(object):
@@ -69,7 +69,7 @@ class SwiftAuth(object):
     def __init__(self, app, conf):
         self.app = app
         self.conf = conf
-        self.logger = utils.get_logger(conf, log_route='keystone')
+        self.logger = swift_utils.get_logger(conf, log_route='keystoneauth')
         self.reseller_prefix = conf.get('reseller_prefix', 'AUTH').strip()
         self.keystone_swift_operator_roles = \
             conf.get('keystone_swift_operator_roles', 'Admin, SwiftOperator')
@@ -91,7 +91,7 @@ class SwiftAuth(object):
         environ['keystone.identity'] = identity
         environ['REMOTE_USER'] = identity.get('tenant')
         environ['swift.authorize'] = self.authorize
-        environ['swift.clean_acl'] = acl.clean_acl
+        environ['swift.clean_acl'] = swift_acl.clean_acl
         return self.app(environ, start_response)
 
     def _keystone_identity(self, environ):
@@ -118,7 +118,7 @@ class SwiftAuth(object):
 
         try:
             version, account, container, obj = \
-                utils.split_path(req.path, 1, 4, True)
+                swift_utils.split_path(req.path, 1, 4, True)
         except ValueError:
             return webob.exc.HTTPNotFound(request=req)
 
@@ -157,14 +157,15 @@ class SwiftAuth(object):
                 req.headers.get('x-container-sync-key', None)
             and 'x-timestamp' in req.headers
             and (req.remote_addr in self.allowed_sync_hosts
-             or utils.get_remote_client(req) in self.allowed_sync_hosts)):
+            or swift_utils.get_remote_client(req) in
+                 self.allowed_sync_hosts)):
             self.logger.debug('allowing proxy %s for container-sync' %
                               req.remote_addr)
             return
 
         # Check if referrer is allowed.
-        referrers, groups = acl.parse_acl(getattr(req, 'acl', None))
-        if acl.referrer_allowed(req.referer, referrers):
+        referrers, groups = swift_acl.parse_acl(getattr(req, 'acl', None))
+        if swift_acl.referrer_allowed(req.referer, referrers):
             if obj or '.rlistings' in groups:
                 self.logger.debug('authorizing %s via referer ACL' %
                                   req.referrer)
