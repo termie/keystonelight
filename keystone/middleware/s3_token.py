@@ -20,28 +20,25 @@
 # This source code is based ./auth_token.py and ./ec2_token.py.
 # See them for their copyright.
 
-"""
-Starting point for routing S3 requests.
-
-"""
+"""Starting point for routing S3 requests."""
 
 import httplib
 import json
 from webob import Request
 
-from swift.common.utils import split_path
+from swift.common import utils as swift_utils
+
 
 PROTOCOL_NAME = "S3 Token Authentication"
 
 
 class S3Token(object):
-    """Auth Middleware that handles S3 authenticating client calls"""
+    """Auth Middleware that handles S3 authenticating client calls."""
     def __init__(self, app, conf):
-        """ Common initialization code """
-        print "Starting the %s component" % PROTOCOL_NAME
-
+        """Common initialization code."""
         self.app = app
-        self.conf = conf
+        self.logger = swift_utils.get_logger(conf, log_route='s3_token')
+        self.logger.debug("Starting the %s component" % PROTOCOL_NAME)
 
         # where to find the auth service (we use this to validate tokens)
         self.auth_host = conf.get('auth_host')
@@ -51,19 +48,21 @@ class S3Token(object):
         # where to tell clients to find the auth service (default to url
         # constructed based on endpoint we have for the service to use)
         self.auth_location = conf.get('auth_uri',
-                                        "%s://%s:%s" % (self.auth_protocol,
-                                        self.auth_host,
-                                        self.auth_port))
+                                      "%s://%s:%s" % (self.auth_protocol,
+                                                      self.auth_host,
+                                                      self.auth_port))
 
         # Credentials used to verify this component with the Auth service since
         # validating tokens is a privileged call
         self.admin_token = conf.get('admin_token')
 
     def __call__(self, environ, start_response):
-        """ Handle incoming request. Authenticate. And send downstream. """
+        """Handle incoming request. authenticate and send downstream. """
         req = Request(environ)
-        version, account, container, obj = \
-            split_path(req.path, 1, 4, True)
+        version, account, container, obj = swift_utils.split_path(req.path,
+                                                                  1,
+                                                                  4,
+                                                                  True)
 
         # Read request signature and access id.
         if not 'Authorization' in req.headers:
@@ -91,7 +90,8 @@ class S3Token(object):
             conn = httplib.HTTPSConnection(self.auth_host, self.auth_port)
 
         conn.request('POST', '/v2.0/s3tokens',
-                     body=creds_json, headers=headers)
+                     body=creds_json,
+                     headers=headers)
         response = conn.getresponse().read()
         conn.close()
 
@@ -99,22 +99,24 @@ class S3Token(object):
         #             keystone return token, tenant, user, and roles
         #             from this call.
         #
-        # NOTE(chmou): We still have the
-        #             same problem we would need to change token_auth to
-        #             detect if we already identified and not doing a
-        #             second query and just pass it tough to swiftauth
-        #             in this case.
+        # NOTE(chmou): We still have the same problem we would need to
+        #              change token_auth to detect if we already
+        #              identified and not doing a second query and just
+        #              pass it through to swiftauth in this case.
+        #              identity_info = json.loads(response)
         identity_info = json.loads(response)
         try:
             token_id = str(identity_info['access']['token']['id'])
             tenant = (identity_info['access']['token']['tenant']['id'],
                       identity_info['access']['token']['tenant']['name'])
-        except (KeyError, IndexError), e:
-            raise e
+        except (KeyError, IndexError):
+            self.logger.debug("Error getting keystone reply: %s" %
+                              (str(response)))
+            raise
 
         req.headers['X-Auth-Token'] = token_id
-        environ['PATH_INFO'] = \
-            environ['PATH_INFO'].replace(account, "AUTH_%s" % tenant[0])
+        environ['PATH_INFO'] = environ['PATH_INFO'].replace(
+                account, "AUTH_%s" % tenant[0])
         return self.app(environ, start_response)
 
 
