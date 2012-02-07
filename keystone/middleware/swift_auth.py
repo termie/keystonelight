@@ -95,7 +95,7 @@ class SwiftAuth(object):
         return self.app(environ, start_response)
 
     def _keystone_identity(self, environ):
-        """Extract the identity from the Keystone auth component"""
+        """Extract the identity from the Keystone auth component."""
         if environ.get('HTTP_X_IDENTITY_STATUS') != 'Confirmed':
             return
         roles = []
@@ -108,7 +108,7 @@ class SwiftAuth(object):
         return identity
 
     def _reseller_check(self, account, tenant_id):
-        """Check reseller prefix"""
+        """Check reseller prefix."""
         return account == '%s_%s' % (self.reseller_prefix, tenant_id)
 
     def authorize(self, req):
@@ -157,8 +157,8 @@ class SwiftAuth(object):
                 req.headers.get('x-container-sync-key', None)
             and 'x-timestamp' in req.headers
             and (req.remote_addr in self.allowed_sync_hosts
-            or swift_utils.get_remote_client(req) in
-                 self.allowed_sync_hosts)):
+                 or swift_utils.get_remote_client(req)
+                 in self.allowed_sync_hosts)):
             self.logger.debug('allowing proxy %s for container-sync' %
                               req.remote_addr)
             return
