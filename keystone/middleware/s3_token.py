@@ -92,8 +92,11 @@ class S3Token(object):
         conn.request('POST', '/v2.0/s3tokens',
                      body=creds_json,
                      headers=headers)
-        response = conn.getresponse().read()
-        conn.close()
+        resp = conn.getresponse()
+        if resp.status < 200 or resp.status >= 300:
+            raise Exception('Keystone reply error: status=%s reason=%s' % (
+                        resp.status,
+                        resp.reason))
 
         # NOTE(vish): We could save a call to keystone by having
         #             keystone return token, tenant, user, and roles
@@ -104,14 +107,16 @@ class S3Token(object):
         #              identified and not doing a second query and just
         #              pass it through to swiftauth in this case.
         #              identity_info = json.loads(response)
-        identity_info = json.loads(response)
+        output = resp.read()
+        conn.close()
+        identity_info = json.loads(output)
         try:
             token_id = str(identity_info['access']['token']['id'])
             tenant = (identity_info['access']['token']['tenant']['id'],
                       identity_info['access']['token']['tenant']['name'])
         except (KeyError, IndexError):
             self.logger.debug("Error getting keystone reply: %s" %
-                              (str(response)))
+                              (str(output)))
             raise
 
         req.headers['X-Auth-Token'] = token_id
