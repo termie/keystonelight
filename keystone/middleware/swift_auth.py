@@ -38,7 +38,7 @@ class SwiftAuth(object):
 
         [filter:swiftauth]
         use = egg:keystone#swiftauth
-        operator_roles = Admin, SwiftOperator
+        operator_roles = admin, SwiftOperator
         is_admin = true
 
     If Swift memcache is to be used for caching tokens, add the additional
@@ -72,7 +72,7 @@ class SwiftAuth(object):
         self.logger = swift_utils.get_logger(conf, log_route='keystoneauth')
         self.reseller_prefix = conf.get('reseller_prefix', 'AUTH').strip()
         self.operator_roles = \
-            conf.get('operator_roles', 'Admin, SwiftOperator')
+            conf.get('operator_roles', 'admin, SwiftOperator')
         self.is_admin = \
             conf.get('is_admin', "false").lower() in \
             ('true', 't', '1', 'on', 'yes', 'y')
